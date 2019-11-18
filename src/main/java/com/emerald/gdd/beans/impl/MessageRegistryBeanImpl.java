@@ -2,7 +2,7 @@ package com.emerald.gdd.beans.impl;
 
 import javax.faces.bean.ManagedBean;
 
-import com.emerald.comic.beans.model.MessageRegistryBean;
+import com.emerald.gdd.beans.model.MessageRegistryBean;
 
 /**
  *

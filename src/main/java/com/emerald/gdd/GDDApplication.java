@@ -1,4 +1,4 @@
-package com.emerald.comic;
+package com.emerald.gdd;
 
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.ServletContext;
@@ -24,7 +24,7 @@ public class GDDApplication extends FacesInitializer implements ServletContextAw
 
 	public static void main(String[] args)
 	{
-		SpringApplication.run(ComicApplication.class, args);
+		SpringApplication.run(GDDApplication.class, args);
 	}
 
 	@SuppressWarnings(value = { "rawtypes", "unchecked" })
