@@ -26,21 +26,14 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	
-
-	/* Normally you would declare the javax.servlet instance here directly. But since we
-	* extend the SpringBootServletInitializer class, we have made our own local (opinioned)
-	* instance of javax.servlet. Making this declaration redundant
-	*/
-    //providedCompile 'javax.servlet:servlet-api:2.5'
-	
 	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
 	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.17'
-	
+
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     //These dependencies is used in order to properly configure JSF UI components
 	compile 'com.sun.faces:jsf-api:2.2.5'
 	compile 'com.sun.faces:jsf-impl:2.2.5'
-	
+
 	//This dependency is a popular implementation of JSF
 	compile 'org.primefaces:primefaces:4.0'
 	compile 'org.primefaces.themes:bootstrap:1.0.10'

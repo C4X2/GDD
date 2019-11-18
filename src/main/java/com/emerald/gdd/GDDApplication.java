@@ -12,12 +12,12 @@ import org.springframework.web.context.ServletContextAware;
 import com.sun.faces.config.FacesInitializer;
 
 /**
- * 
+ *
  * @author C4X2
  * @version 1.0
  */
 @SpringBootApplication
-public class ComicApplication extends FacesInitializer implements ServletContextAware
+public class GDDApplication extends FacesInitializer implements ServletContextAware
 {
 	// Different PrimeFaces Themes
 	private static final String BOOTSTRAP = "bootstrap";
@@ -26,7 +26,7 @@ public class ComicApplication extends FacesInitializer implements ServletContext
 	{
 		SpringApplication.run(ComicApplication.class, args);
 	}
-	
+
 	@SuppressWarnings(value = { "rawtypes", "unchecked" })
 	@Bean
 	public ServletRegistrationBean servletRegistrationBean()
@@ -41,7 +41,7 @@ public class ComicApplication extends FacesInitializer implements ServletContext
 	public void setServletContext(ServletContext servletContext)
 	{
 		servletContext.setAttribute("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-		
+
 		// Set attributes to run PrimeFaces properly
 		servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
 		servletContext.setInitParameter("primefaces.THEME", BOOTSTRAP);
