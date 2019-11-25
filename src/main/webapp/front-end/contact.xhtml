@@ -13,7 +13,11 @@
 	    Add your header here or delete to use the default
 	</ui:define>
 	<ui:define name="content">
-	    Add your content here or delete to use the default
+		<ui:composition>
+    		<p:inputText>
+    			<f:validateLength min="10"></f:validateLength>
+    		</p:inputText>
+    	</ui:composition>
 	</ui:define>
 	<ui:define name="footer">
 	    Add your footer here or delete to use the default

@@ -9,7 +9,7 @@ import com.emerald.gdd.beans.model.MessageRegistryBean;
  * @author C4X2
  * @version 1.0
  */
-@ManagedBean
+@ManagedBean(name="msg" , eager=true)
 public class MessageRegistryBeanImpl implements MessageRegistryBean
 {
 	private final String trueName = "MessageResgistryBean";

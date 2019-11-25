@@ -13,7 +13,10 @@
 
 <!-- BEGIN COMPONENTS/HEADER.XHTML -->
 <h:body>
-	<div style="background-color:navy;width:100%;color:white;"><p>Header</p></div>
+	<p:growl id="popup"></p:growl>
+	<p:menubar>
+		<p:menuitem value="#{headerActionBean.home}" url="#"></p:menuitem>
+	</p:menubar>
 </h:body>
 <!-- END COMPONENTS/HEADER.XHTML -->
 
