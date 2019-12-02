@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/error")
 public class ErrorPageController
 {
-	private static final String ERROR_PAGE = "error";
+	private static final String ERROR_PAGE = "error.jsf";
 
 	@GetMapping
 	public ModelAndView doGet(ModelAndView mav)

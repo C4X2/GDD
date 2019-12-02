@@ -13,7 +13,13 @@
    <!-- MANAGED BEANS -->   	
    <managed-bean>
       <managed-bean-name>msg</managed-bean-name>
-      <managed-bean-class>com.emerald.comic.beans.impl.MessageRegistryBeanImpl</managed-bean-class>
+      <managed-bean-class>com.emerald.gdd.beans.impl.MessageRegistryBeanImpl</managed-bean-class>
+      <managed-bean-scope>application</managed-bean-scope>
+      <!-- Declare properties of the managed bean to be injected -->
+   </managed-bean>
+   <managed-bean>
+      <managed-bean-name>contact</managed-bean-name>
+      <managed-bean-class>com.emerald.gdd.beans.impl.CompanyContactBeanImpl</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
       <!-- Declare properties of the managed bean to be injected -->
    </managed-bean>

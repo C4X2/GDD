@@ -9,10 +9,32 @@
 
 <!-- BEGIN ABOUT.XHTML -->
 <h:body>
-    <ui:composition>
-    	<p:inputText>
-    		<f:validateLength min="10"></f:validateLength>
-    	</p:inputText>
+    <ui:composition template="templates/common.xhtml">
+    	<ui:define name="title">
+    		About - Game Design Document
+    	</ui:define>
+    	<p:separator></p:separator>
+    	<ui:define name="header">
+    		<ui:include src="components/header.xhtml"></ui:include>
+    	</ui:define>
+    	<p:separator></p:separator>
+    	<ui:define name="content">
+    		<h2 style="text-algin:center">About Emerald Softworks, Inc.</h2>
+    		<p:outputLabel value="
+    			Emerald Softworks was founded in 2018 with a mission dedicated to providing open-source resources to game developers across the world.
+    			This site GDD, is one of the first fully produced sites developed by Emerald Softworks, Inc. however there is more on the way!
+    			The CEO and founder of Emerald Softworks, Inc. is Nate Brown who is currently working on his first game, Korlal, a JRPG developed in Unity Game Engine.
+    			We are always open for suggestions about how to better configure our services to better help others. So if you have any comments, recommendations or if
+    			you just want to reach out please feel free to 
+    		"></p:outputLabel>
+    		<p:commandLink action="#{buttonView.buttonAction}">
+    			<h:outputText  value="contact us!"></h:outputText>
+    		</p:commandLink>
+    	</ui:define>
+    	<p:separator></p:separator>
+    	<ui:define name="footer">
+			<ui:include src="components/footer.xhtml"></ui:include>
+		</ui:define>
     </ui:composition>
 </h:body>
 <!-- END ABOUT.XHTML -->

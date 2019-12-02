@@ -13,7 +13,17 @@
 <body>
 <!-- BEGIN COMPONENTS/FOOTER.XHTML -->
 <h:body>
-	<div style="background-color:navy;width:100%;color:red;">Hello</div>
+	<div class="" style="display: block">
+		<h:form>
+			<p:outputLabel value="
+				Provided Curtosy of Emerald Softworks, Inc. Copyright © 2019 All rights reserved.
+			"></p:outputLabel>
+			<h:outputText value="Find the code "></h:outputText>
+			<p:commandLink id="github-link" action="#{buttonView.buttonAction}" ajax="false">
+       			<h:outputText value="here." />
+    		</p:commandLink>
+		</h:form>
+	</div>
 </h:body>
 <!-- END COMPONENTS/FOOTER.XHTML -->
 </body>

@@ -4,4 +4,5 @@
    <!--Here contains all the bean declarations for this class  -->
 <beans>
 	<import resource="bean-definitions/message-registry-bean.xml"/>
+	<!--  <import resource="bean-definitions/company-contact-bean.xml" /> -->
 </beans>

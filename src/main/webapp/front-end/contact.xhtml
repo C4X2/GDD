@@ -8,19 +8,39 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 <!-- BEGIN CONTACT.XHTML -->
-<ui:composition template="">
+<ui:composition template="templates/common.xhtml">
+	<ui:define name="title">
+		Contact Us - Game Desgin Document
+	</ui:define>
 	<ui:define name="header">
-	    Add your header here or delete to use the default
+	    <ui:include src="components/header.xhtml"></ui:include>
 	</ui:define>
 	<ui:define name="content">
-		<ui:composition>
-    		<p:inputText>
-    			<f:validateLength min="10"></f:validateLength>
-    		</p:inputText>
-    	</ui:composition>
+		<div class="info-banner">
+			<p:outputPanel deffered="true">
+				<h2>We care about your feedback!</h2>
+			</p:outputPanel>
+		</div>
+		<div>
+			<h:form action="">
+				<p:outputLabel for="@next" value="What can we help you with?"></p:outputLabel>
+				<p:selectOneMenu>
+					<f:selectItems value="#{contact.helpList}"></f:selectItems>
+				</p:selectOneMenu>
+				<div id="comment">
+					<p:outputLabel for="@next" value="Please explain:"></p:outputLabel>
+					<p:inputText value="">
+						<f:validateLength min="1" max="500"></f:validateLength>
+					</p:inputText>				
+				</div>
+				<div>
+		    		<p:button value="Submit"></p:button>
+    			</div>
+			</h:form>
+		</div>
 	</ui:define>
 	<ui:define name="footer">
-	    Add your footer here or delete to use the default
+	    <ui:include src="components/footer.xhtml"></ui:include>
 	</ui:define>
 </ui:composition>
 <!-- END CONTACT.XHTML -->
