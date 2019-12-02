@@ -7,13 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
 import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.annotation.SessionScope;
 
 import com.emerald.gdd.beans.model.CompanyContactBean;
 
 @ManagedBean(name = "contact")
-// @RequestScope
-@SessionScope
+@RequestScope
 public class CompanyContactBeanImpl implements CompanyContactBean
 {
 	private static final String	PLEASE_SELECT	= "Please Select";
@@ -24,7 +22,7 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	@Override
 	public List<SelectItem> getHelpList()
 	{
-		List<SelectItem> helpList = new ArrayList<> ();
+		List<SelectItem> helpList = new ArrayList<>();
 		helpList.add(new SelectItem(null, PLEASE_SELECT));
 		helpList.add(new SelectItem(COMPLAINT, COMPLAINT));
 		helpList.add(new SelectItem(SUGGESTION, SUGGESTION));
