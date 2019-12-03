@@ -22,19 +22,19 @@
 			</p:outputPanel>
 		</div>
 		<div>
-			<h:form action="">
+			<h:form>
 				<p:outputLabel for="@next" value="What can we help you with?"></p:outputLabel>
-				<p:selectOneMenu>
+				<p:selectOneMenu value="#{contact.contactRecord.reason}">
 					<f:selectItems value="#{contact.helpList}"></f:selectItems>
 				</p:selectOneMenu>
 				<div id="comment">
 					<p:outputLabel for="@next" value="Please explain:"></p:outputLabel>
-					<p:inputText value="">
+					<p:inputText value="#{contact.contactRecord.comment}">
 						<f:validateLength min="1" max="500"></f:validateLength>
 					</p:inputText>				
 				</div>
 				<div>
-		    		<p:button value="Submit"></p:button>
+		    		<p:button action="#{contact.save}" value="Submit"></p:button>
     			</div>
 			</h:form>
 		</div>

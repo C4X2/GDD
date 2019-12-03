@@ -8,7 +8,7 @@ public class GamePlatform
 {
 	private String		name;
 	private String		abbrivatedName;
-	/**A ;-delimited list of manufacturers */
+	/** A ;-delimited list of manufacturers */
 	private String		manufacturer;
 	private String		website;
 	/**

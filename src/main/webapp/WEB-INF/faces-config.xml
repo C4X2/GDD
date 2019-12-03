@@ -23,10 +23,10 @@
       <managed-bean-scope>request</managed-bean-scope>
       <!-- Declare properties of the managed bean to be injected -->
    </managed-bean>
-   <!-- END MANAGED BEANS -->
+    <!-- END MANAGED BEANS -->
    
-   <!-- NAVIGATION RULES --> 
-   
+    <!-- NAVIGATION RULES --> 
+
    <!-- END NAVIGATION RULES -->
 
 </faces-config>

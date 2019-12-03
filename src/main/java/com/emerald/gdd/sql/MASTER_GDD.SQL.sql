@@ -49,3 +49,13 @@ CREATE TABLE ENUM_GAME_PLATFORM (
     retired_date      date
     );
 -- END ENUM_GAME_PLATFORM TABLE DEFINITION --
+
+    -- START CONTACT_RECORD TABLE DEFINITION --
+CREATE TABLE CONTACT_RECORD (
+    reason            varchar(20),
+    comment			  varchar(10),
+    created_date      date,
+    update_date       date,
+    retired_date      date
+    );
+-- END ENUM_GAME_PLATFORM TABLE DEFINITION --

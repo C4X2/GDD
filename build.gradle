@@ -37,7 +37,8 @@ dependencies {
 	//This dependency is a popular implementation of JSF
 	compile 'org.primefaces:primefaces:4.0'
 	compile 'org.primefaces.themes:bootstrap:1.0.10'
-
+	// https://mvnrepository.com/artifact/org.primefaces.themes/all-themes
+	compile group: 'org.primefaces.themes', name: 'all-themes', version: '1.0.10'
 }
 
 test {

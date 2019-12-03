@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * This class extends and configures the Tomcat container servlet. Allows
- * setting of MimeMappings programmicaly, instead of through XML delecarations.
+ * setting of MimeMappings programmatically, instead of through XML declarations.
  *
  * @author C4X2
  *

@@ -1,6 +1,7 @@
 package com.emerald.gdd;
 
 import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
 
 import org.springframework.boot.SpringApplication;
@@ -34,7 +35,6 @@ public class GDDApplication extends FacesInitializer implements ServletContextAw
 		FacesServlet servlet = new FacesServlet();
 		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet, "*.jsf", "*.faces",
 				"*.xhmtl");
-		//servletRegistrationBean.getUrlMappings().add("/error");
 		return servletRegistrationBean;
 	}
 
@@ -47,7 +47,6 @@ public class GDDApplication extends FacesInitializer implements ServletContextAw
 		servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
 		servletContext.setInitParameter("primefaces.THEME", BOOTSTRAP);
 		servletContext.setInitParameter("primefaces.UPLOADER", "commons");
-		servletContext.setAttribute("error-page", "/error.jsf");
 	}
 
 }
