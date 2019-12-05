@@ -11,18 +11,37 @@
    	</application>
 
    <!-- MANAGED BEANS -->   	
-   <managed-bean>
+	<managed-bean>
       <managed-bean-name>msg</managed-bean-name>
       <managed-bean-class>com.emerald.gdd.beans.impl.MessageRegistryBeanImpl</managed-bean-class>
       <managed-bean-scope>application</managed-bean-scope>
       <!-- Declare properties of the managed bean to be injected -->
-   </managed-bean>
-   <managed-bean>
-      <managed-bean-name>contact</managed-bean-name>
-      <managed-bean-class>com.emerald.gdd.beans.impl.CompanyContactBeanImpl</managed-bean-class>
-      <managed-bean-scope>request</managed-bean-scope>
-      <!-- Declare properties of the managed bean to be injected -->
-   </managed-bean>
+   	</managed-bean>
+   	<managed-bean>
+    	<managed-bean-name>contact</managed-bean-name>
+      	<managed-bean-class>com.emerald.gdd.beans.impl.CompanyContactBeanImpl</managed-bean-class>
+      	<managed-bean-scope>request</managed-bean-scope>
+      	<!-- Declare properties of the managed bean to be injected -->
+
+   	</managed-bean>
+   	<managed-bean>
+      	<managed-bean-name>footer</managed-bean-name>
+      	<managed-bean-class>com.emerald.gdd.beans.impl.GDDFooterActionBeanImpl</managed-bean-class>
+      	<managed-bean-scope>session</managed-bean-scope>
+      	<!-- Declare properties of the managed bean to be injected -->
+   	</managed-bean>
+   	<managed-bean>
+      	<managed-bean-name>header</managed-bean-name>
+      	<managed-bean-class>com.emerald.gdd.beans.impl.GDDHeaderActionBeanImpl</managed-bean-class>
+      	<managed-bean-scope>session</managed-bean-scope>
+      	<!-- Declare properties of the managed bean to be injected -->
+   	</managed-bean>
+   	<managed-bean>
+      	<managed-bean-name>build</managed-bean-name>
+      	<managed-bean-class>com.emerald.gdd.beans.impl.GDDBuildBeanImpl</managed-bean-class>
+      	<managed-bean-scope>session</managed-bean-scope>
+      	<!-- Declare properties of the managed bean to be injected -->
+   	</managed-bean>
     <!-- END MANAGED BEANS -->
    
     <!-- NAVIGATION RULES --> 

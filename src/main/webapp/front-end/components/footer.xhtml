@@ -8,23 +8,20 @@
 	
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Insert title here</title>
 </h:head>
-<body>
 <!-- BEGIN COMPONENTS/FOOTER.XHTML -->
 <h:body>
+	<div id="spacer" style="min-height : 50vh;"></div>
 	<div class="" style="display: block">
 		<h:form>
-			<p:outputLabel value="
-				Provided Curtosy of Emerald Softworks, Inc. Copyright © 2019 All rights reserved.
-			"></p:outputLabel>
-			<h:outputText value="Find the code "></h:outputText>
-			<p:commandLink id="github-link" action="#{buttonView.buttonAction}" ajax="false">
-       			<h:outputText value="here." />
-    		</p:commandLink>
+			<p style="text-align:center;position:absolute;bottom: 0;">
+			<h:outputText value="
+				Provided Curtosy of Emerald Softworks, Inc. Copyright © 2019 All rights reserved. Find the code 
+			"></h:outputText>
+			<a href="#{footer.githubLink}" target="_blank">here.</a>
+			</p>
 		</h:form>
 	</div>
 </h:body>
 <!-- END COMPONENTS/FOOTER.XHTML -->
-</body>
 </html>

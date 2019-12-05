@@ -19,17 +19,17 @@
     	</ui:define>
     	<p:separator></p:separator>
     	<ui:define name="content">
-    		<h2 style="text-algin:center">About Emerald Softworks, Inc.</h2>
-    		<p:outputLabel value="
-    			Emerald Softworks was founded in 2018 with a mission dedicated to providing open-source resources to game developers across the world.
-    			This site GDD, is one of the first fully produced sites developed by Emerald Softworks, Inc. however there is more on the way!
-    			The CEO and founder of Emerald Softworks, Inc. is Nate Brown who is currently working on his first game, Korlal, a JRPG developed in Unity Game Engine.
-    			We are always open for suggestions about how to better configure our services to better help others. So if you have any comments, recommendations or if
-    			you just want to reach out please feel free to 
-    		"></p:outputLabel>
-    		<p:commandLink action="#{buttonView.buttonAction}">
-    			<h:outputText  value="contact us!"></h:outputText>
-    		</p:commandLink>
+    	    <h:form id="about">
+	    		<h2 style="text-algin:center">About Emerald Softworks, Inc.</h2>
+	    		<h:outputText value="
+	    			Emerald Softworks was founded in 2018 with a mission dedicated to providing open-source resources to game developers across the world.
+	    			This site GDD, is one of the first fully produced sites developed by Emerald Softworks, Inc. however there is more on the way!
+	    			The CEO and founder of Emerald Softworks, Inc. is Nate Brown who is currently working on his first game, Korlal, a JRPG developed in Unity Game Engine.
+	    			We are always open for suggestions about how to better configure our services to better help others. So if you have any comments, recommendations or if
+	    			you just want to reach out please feel free to 
+	    		"></h:outputText>
+	    		<a  href="/front-end/contact.jsf">contact us!</a>
+    		</h:form>
     	</ui:define>
     	<p:separator></p:separator>
     	<ui:define name="footer">
