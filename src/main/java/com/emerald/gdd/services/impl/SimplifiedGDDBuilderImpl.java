@@ -1,6 +1,10 @@
 package com.emerald.gdd.services.impl;
 
 import java.awt.image.BufferedImage;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -114,42 +118,48 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 	@Override
 	public SimplifiedGDDBuilder setTargetedAudienceAs(String targetedAudience)
 	{
-		// TODO Auto-generated method stub
+		this.simplifiedGDDFormat.setTargetAudience(targetedAudience);
 		return this;
 	}
 
 	@Override
 	public SimplifiedGDDBuilder setTargetShipDateAs(String shipdate)
 	{
-		// TODO Auto-generated method stub
+		DateFormat date = DateFormat.getDateInstance();
+		try
+		{
+			return setTargetShipDateAs(date.parse(shipdate));
+		} catch (ParseException e)
+		{
+			e.printStackTrace();
+		}
 		return this;
 	}
 
 	@Override
 	public SimplifiedGDDBuilder setTargetShipDateAs(Date shipdate)
 	{
-		// TODO Auto-generated method stub
+		this.simplifiedGDDFormat.setShipDate(shipdate);
 		return this;
 	}
 
 	@Override
 	public SimplifiedGDDBuilder theStoryOutlineIs(String storyOutline)
 	{
-		// TODO Auto-generated method stub
+		this.simplifiedGDDFormat.setStoryOutline(storyOutline);
 		return this;
 	}
 
 	@Override
 	public SimplifiedGDDBuilder theGameInspirationAre(String gameInspirations)
 	{
-		// TODO Auto-generated method stub
+		this.simplifiedGDDFormat.setGameInspirations(gameInspirations);
 		return this;
 	}
 
 	@Override
 	public SimplifiedGDDBuilder addAHeroOrVillianToTheOutline(CharacterDesignTemplate character)
 	{
-		// TODO Auto-generated method stub
 		return addMultipleHeroesOrVillians(Collections.singletonList(character));
 	}
 
