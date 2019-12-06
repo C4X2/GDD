@@ -12,30 +12,29 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.emerald.gdd.beans.model.CompanyContactBean;
 import com.emerald.gdd.common.params.impl.ContactRecord;
+import com.emerald.gdd.common.utils.CommonUtils;
 
 @ManagedBean(name = "contact")
 @RequestScope
 public class CompanyContactBeanImpl implements CompanyContactBean
 {
-	private static final String	PLEASE_SELECT	= "Please Select";
 	private static final String	COMPLAINT		= "Complaint";
 	private static final String	SUGGESTION		= "Suggestion";
 	private static final String	OTHER			= "Other";
 	@Autowired
 	private ContactRecord		contactRecord;
-	
+	private boolean				reasonSelected;
+
 	@PostConstruct
 	public void init()
 	{
-		System.out.println("Yolo Swag");
 		contactRecord = new ContactRecord();
 	}
 
 	@Override
 	public List<SelectItem> getHelpList()
 	{
-		List<SelectItem> helpList = new ArrayList<>();
-		helpList.add(new SelectItem(null, PLEASE_SELECT));
+		List<SelectItem> helpList = CommonUtils.getDefaultList();
 		helpList.add(new SelectItem(COMPLAINT, COMPLAINT));
 		helpList.add(new SelectItem(SUGGESTION, SUGGESTION));
 		helpList.add(new SelectItem(OTHER, OTHER));
@@ -44,7 +43,7 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 		 */
 		return helpList;
 	}
-	
+
 	public void save()
 	{
 		if (contactRecord != null)
@@ -63,6 +62,21 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	public void setContactRecord(ContactRecord contactRecord)
 	{
 		this.contactRecord = contactRecord;
+	}
+
+	public boolean isReasonSelected()
+	{
+		return reasonSelected;
+	}
+
+	public void setReasonSelected(boolean reasonSelected)
+	{
+		this.reasonSelected = reasonSelected;
+	}
+	
+	public void revealTextBox()
+	{
+		setReasonSelected(true);
 	}
 
 }

@@ -15,7 +15,49 @@
 	<ui:define name="header">
 	    <ui:include src="components/header.xhtml"></ui:include>
 	</ui:define>
-		<h2>Ready to build your own GDD?</h2>
+	<ui:define name="content">
+		<h2 style="text-align:center;">Ready to build your own GDD?</h2>
+		<h:form enctype="multipart/form-data">
+			<p:graphicImage></p:graphicImage>
+			<p:outputLabel for="@next" value="Primary Game Graphic"></p:outputLabel>
+			<p:fileUpload fileUploadListener="#{build.graphicUpload}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"></p:fileUpload>
+			<div class="container">
+				<div class="row">
+					<p:outputLabel for="@next" value="Title"></p:outputLabel>
+					<p:inputText required="required"></p:inputText>
+					
+					<p:outputLabel for="@next" value="Your Name"></p:outputLabel>
+					<p:inputText></p:inputText>
+					
+					<p:outputLabel for="@next" value="Your Company Name"></p:outputLabel>
+					<p:inputText></p:inputText>
+				</div>
+				<div class="row">
+					<p:outputLabel for="@next" value="Your Target Platform"></p:outputLabel>
+					<p:selectOneMenu>
+						<f:selectItems value="#{build.gamePlatforms}"></f:selectItems>
+					</p:selectOneMenu>
+					
+					<p:outputLabel for="@next" value="Your Target ESRB Rating"></p:outputLabel>
+					<p:selectOneMenu>
+						<f:selectItems value="#{build.esrbRatings}"></f:selectItems>
+					</p:selectOneMenu>
+				</div>
+				<div class="row">
+					<div class="col">
+						<p:outputLabel for="@next" value="Your Target Audience"></p:outputLabel>
+						<p:inputText></p:inputText>
+					</div>
+					<div class="col">
+						<p:outputLabel for="@next" value="Your Planned Ship Date"></p:outputLabel>
+						<p:calendar></p:calendar>
+					</div>
+					<p:commandButton value="Back" style="position:absolute;left:0;"></p:commandButton>
+					<p:commandButton value="Next" style="position:absolute;right:0;"></p:commandButton>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
 	<ui:define name="footer">
 	    <ui:include src="components/footer.xhtml"></ui:include>
 	</ui:define>
