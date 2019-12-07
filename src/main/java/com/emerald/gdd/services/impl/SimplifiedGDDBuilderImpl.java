@@ -23,6 +23,11 @@ import com.emerald.gdd.services.model.SimplifiedGDDBuilder;
 public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 {
 	private SimplifiedGDDFormat simplifiedGDDFormat;
+	
+	public SimplifiedGDDBuilderImpl()
+	{
+		this.simplifiedGDDFormat = new SimplifiedGDDFormat();
+	}
 
 	@Override
 	public boolean hasSufficientCriteria()

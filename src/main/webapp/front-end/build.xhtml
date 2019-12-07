@@ -24,7 +24,7 @@
 			<div class="container">
 				<div class="row">
 					<p:outputLabel for="@next" value="Title"></p:outputLabel>
-					<p:inputText required="required"></p:inputText>
+					<p:inputText required="required" valueChangeListener="#{build.simplifiedGDDBuilder.setGDDTitle('this')}"></p:inputText>
 					
 					<p:outputLabel for="@next" value="Your Name"></p:outputLabel>
 					<p:inputText></p:inputText>

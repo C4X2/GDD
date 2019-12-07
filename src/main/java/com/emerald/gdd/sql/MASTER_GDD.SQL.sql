@@ -50,7 +50,18 @@ CREATE TABLE ENUM_GAME_PLATFORM (
     );
 -- END ENUM_GAME_PLATFORM TABLE DEFINITION --
 
-    -- START CONTACT_RECORD TABLE DEFINITION --
+-- START ENUM_ESRB TABLE DEFINITION --
+CREATE TABLE ENUM_ESRB (
+	rating           varchar(30),
+	full_rating      varchar(45),
+	description      varchar(200),
+	created_date      date,
+    update_date       date,
+    retired_date      date
+);
+-- END   ENUM_ESRB TABLE DEFINITION --
+
+-- START CONTACT_RECORD TABLE DEFINITION --
 CREATE TABLE CONTACT_RECORD (
     reason            varchar(20),
     comment			  varchar(10),

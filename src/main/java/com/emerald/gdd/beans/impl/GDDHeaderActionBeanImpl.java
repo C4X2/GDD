@@ -4,8 +4,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name="header")
-@SessionScoped
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+//@ManagedBean(name="header")
+//@SessionScoped
+@Component
+@Scope("request")
 public class GDDHeaderActionBeanImpl
 {
 	
