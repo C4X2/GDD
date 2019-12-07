@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace = "MessageMapper">
-    <resultMap id="MessageMapperResult" type="Message">
-        <result property="messageKey" column="message_key" />
-        <result property="message"    column="message" />
-        <result property="description" column="description" />
-        <result property="createdDate" column="created_date" />
-        <result property="updateDate"    column="update_date" />
-        <result property="retiredDate" column="retired_date" />
-    </resultMap>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MessageMapper">
+	<resultMap id="MessageMapperResult" type="Message">
+		<result property="messageKey"  column="message_key" />
+		<result property="message"     column="message" />
+		<result property="description" column="description" />
+		<result property="createdDate" column="created_date" />
+		<result property="updateDate"  column="update_date" />
+		<result property="retiredDate" column="retired_date" />
+	</resultMap>
+	<sql id="selectMany">
+		SELECT * FROM
+	</sql>
+	<select id="selectAll" resultMap="MessageMapperResult">
+		SELECT * FROM MESSAGE_REGISTRY;
+	</select>
 
-    <select id="selectAll" resultMap="MessageMapperResult">
-        SELECT * FROM MESSAGE_REGISTRY;
-    </select>
+	<select id="selectById" resultMap="MessageMapperResult">
+		SELECT * FROM MESSAGE_REGISTRY WHERE MESSAGE_KEY = #{messageKey};
+	</select>
 
-    <select id="selectById" parameterType="varchar" resultMap="MessageMapperResult">
-        SELECT * FROM MESSAGE_REGISTRY WHERE MESSAGE_KEY = #{messageKey};
-    </select>
-    
 </mapper>

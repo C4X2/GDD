@@ -9,6 +9,12 @@ CREATE TABLE MESSAGE_REGISTRY (
     );
 -- END MESSAGE_REGISTRY TABLE DEFINITION --
 
+-- START MESSAGE_REGISTRY ENTRIES --
+INSERT INTO MESSAGE_REGISTRY(message_key, description, message, created_date)
+VALUES ("homepage","The header shown on the top of the webpage", "Game Desgin Document", CURDATE())
+UNION ALL ("gddComment", "Explaination of what a GDD is.", "A Game Design Document, or GDD, defines every aspect of your game. Additionaly it acts as an orienting document for each stakeholder in your organization. As a GDD explicitly states the goals game development needs to meet , from the small technical requirements to the large conceptual challenges. Finally, A GDD is a resource for keeping a game true to its roots. If the game changes so should the GDD.", CURDATE());
+-- END MESSAGE_REGISTRY ENTRIES --
+
 -- START LICENSE TABLE DEFINITION --
 CREATE TABLE LICENSE (
     license_key  text,
@@ -41,7 +47,7 @@ CREATE TABLE ENUM_GAME_PLATFORM (
     media             varchar(20),
     os                varchar(30),
     manufacturer      mediumtext,
-    is_current_system bool
+    is_current_system bool,
     link_to_def       text,
     release_date      date,
     created_date      date,

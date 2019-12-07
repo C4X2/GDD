@@ -45,13 +45,8 @@ public final class MessageManagerImpl implements MessageManager
 	@Override
 	public String getMessage(String key, String defaultMessage)
 	{
-		if (key == null)
-		{
-			return null;
-		}
-		String message = messageRegistryService.selectMessageFromKey(key);
+		String message = (key == null) ? null : messageRegistryService.selectMessageFromKey(key);
 		return (message == null) ? defaultMessage : message;
-
 	}
 
 	@Override
@@ -69,8 +64,9 @@ public final class MessageManagerImpl implements MessageManager
 		{
 			String propertyKey = (String) Resources.getUrlAsProperties(resource).get(key);
 			return (propertyKey == null) ? defaultMessage : messageRegistryService.selectMessageFromKey(propertyKey);
-		} catch (Exception e) 
-		{}
+		} catch (Exception e)
+		{
+		}
 		return null;
 	}
 
