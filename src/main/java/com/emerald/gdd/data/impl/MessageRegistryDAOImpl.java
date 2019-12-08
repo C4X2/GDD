@@ -20,7 +20,6 @@ public class MessageRegistryDAOImpl implements MessageRegistryDAO
 		try
 		{
 			InputStream reader = Resources.getResourceAsStream(MY_BATIS_RESOURCE_LOCATION);
-			//Reader reader = Resources.getResourceAsReader("com/emerald/gdd/data/mybatis-config.xml");
 	    	SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);		
 	    	SqlSession session = sqlSessionFactory.openSession();
 	    	Message message = session.selectOne("MessageMapper.selectById", id);
@@ -39,7 +38,7 @@ public class MessageRegistryDAOImpl implements MessageRegistryDAO
 	{
 		try
 		{
-			Reader reader = Resources.getResourceAsReader(MY_BATIS_RESOURCE_LOCATION);
+			InputStream reader = Resources.getResourceAsStream(MY_BATIS_RESOURCE_LOCATION);
 	    	SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);		
 	    	SqlSession session = sqlSessionFactory.openSession();
 	    	session.selectOne("MessageMapper.insert", record);

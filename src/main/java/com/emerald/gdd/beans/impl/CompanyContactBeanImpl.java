@@ -1,5 +1,7 @@
 package com.emerald.gdd.beans.impl;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.emerald.gdd.beans.model.CompanyContactBean;
 import com.emerald.gdd.common.params.impl.ContactRecord;
 import com.emerald.gdd.common.utils.CommonUtils;
+import com.emerald.gdd.services.impl.ContactRecordServiceImpl;
+import com.emerald.gdd.services.model.ContactRecordService;
 
 @ManagedBean(name = "contact")
 @RequestScope
@@ -24,11 +28,13 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	@Autowired
 	private ContactRecord		contactRecord;
 	private boolean				reasonSelected;
+	private ContactRecordService contactRecordService;
 
 	@PostConstruct
 	public void init()
 	{
-		contactRecord = new ContactRecord();
+		setContactRecord(new ContactRecord());
+		setContactRecordService(new ContactRecordServiceImpl());
 	}
 
 	@Override
@@ -48,9 +54,8 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	{
 		if (contactRecord != null)
 		{
-			System.out.println();
-			System.out.println("Not null!");
-			System.out.println();
+			contactRecord.setCreatedDate(Date.valueOf(LocalDate.now()));
+			contactRecordService.validateAndSaveContactRecord(contactRecord);
 		}
 	}
 
@@ -77,6 +82,16 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	public void revealTextBox()
 	{
 		setReasonSelected(true);
+	}
+
+	public ContactRecordService getContactRecordService()
+	{
+		return contactRecordService;
+	}
+
+	public void setContactRecordService(ContactRecordService contactRecordService)
+	{
+		this.contactRecordService = contactRecordService;
 	}
 
 }

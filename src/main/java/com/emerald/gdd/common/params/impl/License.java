@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * A parameter representing a License Agreement
- * 
+ *
  * @author C4X2
  * @version 1.0
  */

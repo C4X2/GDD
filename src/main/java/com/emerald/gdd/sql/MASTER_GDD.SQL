@@ -11,8 +11,15 @@ CREATE TABLE MESSAGE_REGISTRY (
 
 -- START MESSAGE_REGISTRY ENTRIES --
 INSERT INTO MESSAGE_REGISTRY(message_key, description, message, created_date)
-VALUES ("homepage","The header shown on the top of the webpage", "Game Desgin Document", CURDATE())
-UNION ALL ("gddComment", "Explaination of what a GDD is.", "A Game Design Document, or GDD, defines every aspect of your game. Additionaly it acts as an orienting document for each stakeholder in your organization. As a GDD explicitly states the goals game development needs to meet , from the small technical requirements to the large conceptual challenges. Finally, A GDD is a resource for keeping a game true to its roots. If the game changes so should the GDD.", CURDATE());
+VALUES ("homepage","The header shown on the top of the webpage", "Game Desgin Document", CURDATE()),
+ ("gddComment", "Explaination of what a GDD is.", "A Game Design Document, or GDD, defines every aspect of your game. Additionaly it acts as an orienting document for each stakeholder in your organization. As a GDD explicitly states the goals game development needs to meet , from the small technical requirements to the large conceptual challenges. Finally, A GDD is a resource for keeping a game true to its roots. If the game changes so should the GDD.", CURDATE()),
+ ("contact_us", "Contact Us, header on the top of the webpage", "Contact Us", CURDATE()),
+ ("license", "License, header on the top of the webpage", "License", CURDATE()),
+ ("build", "Build, header on the top of the webpage", "Build Your Own", CURDATE()),
+ ("about", "About, header on the top of the webpage", "About", CURDATE()),
+ ("error", "Simple error message", "Error", CURDATE()),
+ ("feedback_encouragement", "Encourage the user to give feedback.", "We care about your feedback!", CURDATE()),
+ ("placeholder_user_input", "Placeholder text for the Contact Us page", "We care about your feedback!", CURDATE());
 -- END MESSAGE_REGISTRY ENTRIES --
 
 -- START LICENSE TABLE DEFINITION --

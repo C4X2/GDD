@@ -11,5 +11,5 @@ package com.emerald.gdd.common.params.model;
  */
 public interface Singleton<T>
 {
-
+	
 }

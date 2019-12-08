@@ -19,5 +19,13 @@
 	<select id="selectById" resultMap="MessageMapperResult">
 		SELECT * FROM MESSAGE_REGISTRY WHERE MESSAGE_KEY = #{messageKey};
 	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM MESSAGE_REGISTRY WHERE MESSAGE_KEY = #{messageKey};
+	</select>
+	
+	<select id="countAll" resultType="int">
+		SELECT COUNT(*) FROM MESSAGE_REGISTRY;
+	</select>
 
 </mapper>
