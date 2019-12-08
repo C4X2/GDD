@@ -7,4 +7,6 @@ import com.emerald.gdd.common.params.impl.GamePlatform;
 public interface GamePlatformService
 {
 	public List<GamePlatform> getAllGamePlatforms();
+
+	public GamePlatform selectGamePlatformByName(String name);
 }

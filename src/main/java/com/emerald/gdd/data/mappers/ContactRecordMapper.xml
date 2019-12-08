@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "ContactRecordMapper">
+	<resultMap id="ContactRecordMapperResult" type="ContactRecord">
+		<result property="reason"      column="reason" />
+		<result property="comment"     column="comment" />
+		<result property="createdDate" column="created_date" />
+        <result property="updateDate"  column="update_date" />
+        <result property="retiredDate" column="retired_date" />
+	</resultMap>
+	<insert id="insert">
+		INSERT INTO CONTACT_RECORD(reason, comment, created_date)
+		VALUES (#{reason},#{comment},#{createdDate});
+	</insert>
+	<select id="selectAll" resultMap="ContactRecordMapperResult">
+		SELECT * FROM CONTACT_RECORD;
+	</select>
+</mapper>

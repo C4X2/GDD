@@ -1,54 +1,116 @@
 package com.emerald.gdd.beans.impl;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import com.emerald.gdd.beans.model.MessageRegistryBean;
+import com.emerald.gdd.services.impl.MessageManagerImpl;
 
 /**
+ * This is the primary way that text values in the UI are populated. This class
+ * implements Map so that the values can be accessed in the clean
+ * #{msg.key_value}. This class assumes a JSF environment!
  *
  * @author C4X2
- * @version 1.0
+ * @version 2.1
  */
 @ManagedBean(name = "msg", eager = true)
 @ApplicationScoped()
-public class MessageRegistryBeanImpl implements MessageRegistryBean
+public class MessageRegistryBeanImpl implements MessageRegistryBean, Map
 {
-	private final String	trueName	= "MessageResgistryBean";
-
-	private String			gddComment;
 
 	public MessageRegistryBeanImpl()
 	{
 
 	}
 
-	public String getTrueName()
+	@Override
+	public int size()
 	{
-		return trueName;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	public String getGDDComment()
+	@Override
+	public boolean isEmpty()
 	{
-		return "What is a GDD you ask?";
+		// Since we are using this class as a wrapper for the MessageManager, this
+		// inquiry will always be false since there will always be messages in the DB.
+		return false;
 	}
 
-	public String getGddComment()
+	@Override
+	public boolean containsKey(Object key)
 	{
-		return "A Game Design Document, or GDD, defines every aspect of your game. "
-				+ "Additionaly it acts as an orienting document for each stakeholder in your organization. "
-				+ "As a GDD explicitly states the goals game development needs to meet , from the small technical requirements to the large conceptual challenges. "
-				+ "Finally, A GDD is a resource for keeping a game true to its roots. If the game changes so should the GDD.";
+		return (MessageManagerImpl.instance().getMessage((String) key) == null);
 	}
 
-	public void setGddComment(String gddComment)
+	@Override
+	public boolean containsValue(Object value)
 	{
-		this.gddComment = gddComment;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	public String getHomepage()
+	@Override
+	public Object get(Object key)
 	{
-		return "Game Desgin Document";
+		return (MessageManagerImpl.instance().getMessage((String) key));
+	}
+
+	@Override
+	public Object put(Object key, Object value)
+	{
+		return (MessageManagerImpl.instance().addMessage((String) key, (String) value));
+	}
+
+	@Override
+	public Object remove(Object key)
+	{
+		throw new UnsupportedOperationException(
+				"At this time, this application does not support removing messages from the UI.");
+	}
+
+	@Override
+	public void putAll(Map m)
+	{
+		for (Object key : m.keySet())
+		{
+			put(key, m.get(key));
+		}
+
+	}
+
+	@Override
+	public void clear()
+	{
+		throw new UnsupportedOperationException("At this time the clear() opeation has not been defined");
+	}
+
+	@Override
+	public Set keySet()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection values()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set entrySet()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

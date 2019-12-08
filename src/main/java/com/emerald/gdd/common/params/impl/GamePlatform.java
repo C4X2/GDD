@@ -4,6 +4,12 @@ import java.util.Date;
 
 import com.emerald.gdd.common.constants.MediaType;
 
+/**
+ * Denotes a game platform that developers can target.
+ * 
+ * @author C4X2
+ * @version 1.1
+ */
 public class GamePlatform
 {
 	private String		name;

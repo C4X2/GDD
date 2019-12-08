@@ -10,6 +10,7 @@ import javax.faces.model.SelectItem;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 
 import com.emerald.gdd.beans.model.BaseBean;
@@ -116,5 +117,13 @@ public class GDDBuildBeanImpl implements BaseBean
 		System.out.println();
 		System.out.println(file.getFileName());
 		System.out.println();
+	}
+	
+	public List<SelectItem> getMediaTypes()
+	{
+		List<SelectItem> returnList = CommonUtils.getDefaultList();
+		Object ong = MediaType.TEXT_XML;
+		
+		return returnList;
 	}
 }

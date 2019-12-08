@@ -10,7 +10,7 @@
 <!-- BEGIN CONTACT.XHTML -->
 <ui:composition template="templates/common.xhtml">
 	<ui:define name="title">
-		Contact Us - Game Desgin Document
+		#{msg.contact_us} - #{msg.homepage}
 	</ui:define>
 	<ui:define name="header">
 	    <ui:include src="components/header.xhtml"></ui:include>
@@ -18,7 +18,7 @@
 	<ui:define name="content">
 		<div class="info-banner">
 			<p:outputPanel deffered="true">
-				<h2 style="text-align:center">We care about your feedback!</h2>
+				<h2 style="text-align:center">#{msg.feedback_encouragement}</h2>
 			</p:outputPanel>
 		</div>
 		<div>
@@ -30,13 +30,11 @@
 				<div id="comment">
 					<p:outputLabel for="@next" value="Please explain:"></p:outputLabel>
 					 <br />
-					<p:inputTextarea title="user_input" rows="5" placeholder="Let us know what you think..." cols="30" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" validatorMessage="Please shorten your message to under 500 characters." rendered="true" />
+					<p:inputTextarea value="#{contact.contactRecord.comment}" title="user_input" rows="5" placeholder="#{msg.placeholder_user_input}" cols="30" counter="display" maxlength="500" counterTemplate="{0} characters remaining." autoResize="false" validatorMessage="Please shorten your message to under 500 characters." rendered="true" />
     					<br />
     				<h:outputText id="display" />				
 				</div>
-				<div>
-		    		<p:button action="#{contact.save}" value="Submit"></p:button>
-    			</div>
+		    	<p:commandButton action="#{contact.save}" type="submit" value="Submit"></p:commandButton >
 			</h:form>
 		</div>
 	</ui:define>

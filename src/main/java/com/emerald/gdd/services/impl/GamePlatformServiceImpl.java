@@ -12,7 +12,16 @@ public class GamePlatformServiceImpl implements GamePlatformService
 	@Override
 	public List<GamePlatform> getAllGamePlatforms()
 	{
-		return new ArrayList<GamePlatform> ();
+		List<GamePlatform> rtrnList = new ArrayList<GamePlatform> ();
+		// Add all relevant GamePlatforms
+		return rtrnList;
+	}
+
+	@Override
+	public GamePlatform selectGamePlatformByName(String name)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
     
 }
