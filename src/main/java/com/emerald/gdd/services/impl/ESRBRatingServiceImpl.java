@@ -13,7 +13,8 @@ public class ESRBRatingServiceImpl implements ESRBRatingService
 	@Override
 	public List<ESRBRating> getAllESRBRatings()
 	{
-		return new ArrayList<ESRBRating> ();
+		List<ESRBRating> rtrnList = new ArrayList<ESRBRating> ();
+		return rtrnList;
 	}
 
 }

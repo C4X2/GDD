@@ -19,7 +19,15 @@ VALUES ("homepage","The header shown on the top of the webpage", "Game Desgin Do
  ("about", "About, header on the top of the webpage", "About", CURDATE()),
  ("error", "Simple error message", "Error", CURDATE()),
  ("feedback_encouragement", "Encourage the user to give feedback.", "We care about your feedback!", CURDATE()),
- ("placeholder_user_input", "Placeholder text for the Contact Us page", "We care about your feedback!", CURDATE());
+ ("placeholder_user_input", "Placeholder text for the Contact Us page", "We care about your feedback!", CURDATE()),
+ ("about_emerald", "About Page header", "About Emerald Softworks, Inc.", CURDATE()),
+ ("home", "Home", "Home", CURDATE()),
+ ("build_keyword", "The word build", "Build", CURDATE()),
+ ("about_text", "A short description of Emerald Softworks, and it's CEO", "Emerald Softworks was founded in 2018 with a mission dedicated to providing open-source resources to game developers across the world.
+	    			This site GDD, is one of the first fully produced sites developed by Emerald Softworks, Inc. however there is more on the way!
+	    			The CEO and founder of Emerald Softworks, Inc. is Nate Brown who is currently working on his first game, Korlal, a JRPG developed in Unity Game Engine.
+	    			We are always open for suggestions about how to better configure our services to better help others. So if you have any comments, recommendations or if
+	    			you just want to reach out please feel free to", CURDATE());
 -- END MESSAGE_REGISTRY ENTRIES --
 
 -- START LICENSE TABLE DEFINITION --

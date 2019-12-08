@@ -32,6 +32,20 @@ public class GDDBuildBeanImpl implements BaseBean
 	private GamePlatformService		gamePlatformService;
 	private Integer					pageNumber;
 	private ESRBRatingService		eSRBRatingService;
+	/**
+	 * This is the first page in the scroll-able build content.
+	 */
+	private final static Integer	FIRST_PAGE			= 1;
+	/**
+	 * This is the last page in the scroll-able build content.
+	 */
+	private final static Integer	FINAL_PAGE			= 2;
+	/**
+	 * This value is to prevent the user from making too many pages and overloading
+	 * the program. With the possibility to make 'infinite' characters, a bad actor
+	 * could in theory try to overload the system.
+	 */
+	private final static Integer	MAX_ALLOWABLE_PAGES	= 1000;
 
 	@PostConstruct
 	public void init()
@@ -62,9 +76,26 @@ public class GDDBuildBeanImpl implements BaseBean
 		this.pageNumber = pageNumber;
 	}
 
-	public void incrementPageNumber()
+	public void nextPage()
 	{
-		setPageNumber(pageNumber + 1);
+		if (getPageNumber() == FINAL_PAGE /* || Possibly implement a method to check number of total pages */)
+		{
+
+		} else
+		{
+			setPageNumber(pageNumber + 1);
+		}
+	}
+
+	public void lastPage()
+	{
+		if (getPageNumber() <= FIRST_PAGE)
+		{
+			setPageNumber(FIRST_PAGE);
+		} else
+		{
+			setPageNumber(pageNumber - 1);
+		}
 	}
 
 	public List<SelectItem> getGamePlatforms()
@@ -108,7 +139,7 @@ public class GDDBuildBeanImpl implements BaseBean
 	{
 		this.gamePlatformService = gamePlatformService;
 	}
-	
+
 	public void graphicUpload(FileUploadEvent event)
 	{
 		System.out.println("Entering grahpicUpload method");
@@ -118,12 +149,16 @@ public class GDDBuildBeanImpl implements BaseBean
 		System.out.println(file.getFileName());
 		System.out.println();
 	}
-	
+
 	public List<SelectItem> getMediaTypes()
 	{
 		List<SelectItem> returnList = CommonUtils.getDefaultList();
-		Object ong = MediaType.TEXT_XML;
-		
+
 		return returnList;
+	}
+
+	public String getCurrentPage()
+	{
+		return "build_" + getPageNumber() + CommonUtils.XHTML;
 	}
 }
