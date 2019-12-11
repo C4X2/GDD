@@ -8,28 +8,37 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.emerald.gdd.common.params.impl.ContactRecord;
+import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.model.ContactRecordDAO;
 
 public class ContactRecordDAOImpl implements ContactRecordDAO
 {
-	private final String MY_BATIS_RESOURCE_LOCATION = "com/emerald/gdd/data/mybatis-config.xml";
+
 	@Override
 	public int insert(ContactRecord record)
 	{
+		SqlSession session = null;
 		try
 		{
-			InputStream reader = Resources.getResourceAsStream(MY_BATIS_RESOURCE_LOCATION);
-		    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);		
-		    SqlSession session = sqlSessionFactory.openSession();
-		    session.selectOne("ContactRecordMapper.insert", record);
-		    return 1;
-		}
-		catch(Exception e)
+			InputStream reader = Resources.getResourceAsStream(CommonUtils.MY_BATIS_RESOURCE_LOCATION);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			session = sqlSessionFactory.openSession();
+			int rows = session.insert("ContactRecordMapper.insert", record);
+			session.commit(true);
+			return rows;
+		} catch (Exception e)
 		{
 			// do nothing
 		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
 		return 0;
-		
+
 	}
 
 }

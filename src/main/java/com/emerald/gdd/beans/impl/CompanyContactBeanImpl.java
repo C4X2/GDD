@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +54,27 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 
 	public void save()
 	{
+		boolean sucess = false;
 		if (contactRecord != null)
 		{
 			contactRecord.setCreatedDate(Date.valueOf(LocalDate.now()));
-			contactRecordService.validateAndSaveContactRecord(contactRecord);
+			sucess = contactRecordService.validateAndSaveContactRecord(contactRecord);
 		}
+		String message = (sucess) ? "Your Record was saved successfully!" : ("Your record errored out!");
+		addPopUpMessage(message);
+		resetContactRecord();
+	}
+
+	private void addPopUpMessage(String message)
+	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Result:", message));	
+	}
+
+	private void resetContactRecord()
+	{
+		contactRecord = null;
+		contactRecord = new ContactRecord();		
 	}
 
 	public ContactRecord getContactRecord()

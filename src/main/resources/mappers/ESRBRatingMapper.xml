@@ -10,8 +10,17 @@
 		<result property="retiredDate" column="retired_date" />
 	</resultMap>
 	
+	<insert id="insert">
+		INSERT INTO ENUM_ESRB (rating, full_rating, description, created_date, retired_date)
+		VALUES (#{rating},#{fullRating},#{description},#{createdDate},#{updateDate},#{retiredDate});
+	</insert>
+	
 	<select id="selectAll" resultMap="ESRBRatingMapperResult">
 		SELECT * FROM ENUM_ESRB;
 	</select>
-
+	
+	<select id="selectById" resultMap="ESRBRatingMapperResult">
+		SELECT * FROM ENUM_ESRB WHERE rating=#{rating};
+	</select>
+	
 </mapper>

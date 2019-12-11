@@ -44,5 +44,13 @@ public interface SimplifiedGDDBuilder extends GDDBuilder
 	public SimplifiedGDDBuilder defineAControlScheme(String mechanics);
 
 	public SimplifiedGDDBuilder defineAMonetizationStrategy(String monetizationStrategy);
+	/*
+	public String getGamePlaform();
+	
+	public void setGamePlaform();
+	
+	public String getAudience();
+	
+	public void setAudience();*/
 
 }

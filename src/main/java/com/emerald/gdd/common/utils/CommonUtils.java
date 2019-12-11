@@ -13,7 +13,9 @@ import javax.faces.model.SelectItem;
  */
 public class CommonUtils
 {
-	public static final String PLEASE_SELECT = "Please Select";
+	public static final String	PLEASE_SELECT				= "Please Select";
+	public static final String	XHTML						= ".xhtml";
+	public static final String	MY_BATIS_RESOURCE_LOCATION	= "mybatis-config.xml";
 
 	/**
 	 * Returns a list of select items only populated with a \'Please Select\'
