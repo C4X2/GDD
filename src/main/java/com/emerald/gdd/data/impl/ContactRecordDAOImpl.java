@@ -17,17 +17,25 @@ public class ContactRecordDAOImpl implements ContactRecordDAO
 	@Override
 	public int insert(ContactRecord record)
 	{
+		SqlSession session = null;
 		try
 		{
 			InputStream reader = Resources.getResourceAsStream(CommonUtils.MY_BATIS_RESOURCE_LOCATION);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-			SqlSession session = sqlSessionFactory.openSession();
+			session = sqlSessionFactory.openSession();
 			int rows = session.insert("ContactRecordMapper.insert", record);
 			session.commit(true);
 			return rows;
 		} catch (Exception e)
 		{
 			// do nothing
+		}
+		finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
 		}
 		return 0;
 

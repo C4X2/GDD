@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
 import org.springframework.util.StringUtils;
 
 import com.emerald.gdd.common.params.impl.CharacterDesignTemplate;
@@ -194,6 +193,16 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 	{
 		this.simplifiedGDDFormat.setMonetizationStrategy(monetizationStrategy);
 		return this;
+	}
+
+	public SimplifiedGDDFormat getSimplifiedGDDFormat()
+	{
+		return simplifiedGDDFormat;
+	}
+
+	public void setSimplifiedGDDFormat(SimplifiedGDDFormat simplifiedGDDFormat)
+	{
+		this.simplifiedGDDFormat = simplifiedGDDFormat;
 	}
 
 }

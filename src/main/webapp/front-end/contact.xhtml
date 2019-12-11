@@ -23,6 +23,7 @@
 		</div>
 		<div>
 			<h:form enctype="multipart/form-data">
+				<p:growl id="popup-growl" showDetail="true" sticky="false"></p:growl>
 				<p:outputLabel for="@next" value="What can we help you with?"></p:outputLabel>
 				<p:selectOneMenu value="#{contact.contactRecord.reason}" actionListener="#{contact.revealTextBox}">
 					<f:selectItems value="#{contact.helpList}"></f:selectItems>
@@ -34,7 +35,7 @@
     					<br />
     				<h:outputText id="display" />				
 				</div>
-		    	<p:commandButton action="#{contact.save}" type="submit" value="Submit"></p:commandButton >
+		    	<p:commandButton action="#{contact.save}" type="submit" value="Submit" update="@form"></p:commandButton >
 			</h:form>
 		</div>
 	</ui:define>

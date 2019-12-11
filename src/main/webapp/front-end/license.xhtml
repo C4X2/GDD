@@ -17,19 +17,13 @@
 		<ui:define name="header">
 			<ui:include src="components/header.xhtml"></ui:include>
 		</ui:define>
-		<br />
 		<ui:define name="content">
-		   <h:outputText value="
-		   	All content provided by this site is licensed under the Mozilla Public License 2.0 which can be found 
-		   "></h:outputText>
-		   <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">here.</a>
-		   <p:separator></p:separator>
-		   <h:outputText value="
-		   	It is also pasted below for convience.
-		   "></h:outputText>
-		  <!--   <ui:include src="https://www.mozilla.org/en-US/MPL/2.0/"></ui:include>-->
+		    <h:outputText value="#{msg.content_provided_by}"></h:outputText>
+		    <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">here.</a>
+		    <p:separator></p:separator>
+		    <h:outputText value="#{msg.convience}"></h:outputText>
+		    <!-- TODO:  <h:outputText value="#{license.mozillaLicense}"></h:outputText>-->
 		</ui:define>
-		<br />
 		<ui:define name="footer">
 			<ui:include src="components/footer.xhtml"></ui:include>
 		</ui:define>
