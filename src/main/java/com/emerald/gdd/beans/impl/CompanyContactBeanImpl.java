@@ -57,7 +57,6 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 		boolean sucess = false;
 		if (contactRecord != null)
 		{
-			contactRecord.setCreatedDate(Date.valueOf(LocalDate.now()));
 			sucess = contactRecordService.validateAndSaveContactRecord(contactRecord);
 		}
 		String message = (sucess) ? "Your Record was saved successfully!" : ("Your record errored out!");

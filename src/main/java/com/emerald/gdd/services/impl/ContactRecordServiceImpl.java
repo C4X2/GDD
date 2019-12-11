@@ -1,5 +1,8 @@
 package com.emerald.gdd.services.impl;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -20,6 +23,11 @@ public class ContactRecordServiceImpl implements ContactRecordService
 	@Override
 	public boolean validateAndSaveContactRecord(ContactRecord record)
 	{
+		if (record == null)
+		{
+			return false;
+		}
+		record.setCreatedDate(Date.valueOf(LocalDate.now()));
 		return contactRecordDAO.insert(record) > 0;
 	}
 
