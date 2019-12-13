@@ -52,5 +52,12 @@
     <!-- NAVIGATION RULES --> 
 
    <!-- END NAVIGATION RULES -->
+   
+   <!-- CONVERTERS -->
+   <converter>
+   	<converter-id>targetedPlatformConverter</converter-id>
+   	<converter-class>com.emerald.gdd.common.converters.TargetedPlatformConverter</converter-class>
+   </converter>
+   <!-- END CONVERTERS -->
 
 </faces-config>

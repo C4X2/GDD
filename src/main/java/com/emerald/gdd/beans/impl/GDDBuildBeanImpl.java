@@ -50,7 +50,24 @@ public class GDDBuildBeanImpl implements BaseBean
 	 * could in theory try to overload the system.
 	 */
 	private final static Integer	MAX_ALLOWABLE_PAGES	= 1000;
-
+	
+	/////////////////////////////////////////////////////
+	//**************************************************
+	//* The following booleans control what is seen on *
+	//* the UI.                                        *
+	//**************************************************
+	/////////////////////////////////////////////////////
+	private boolean page1;
+	private boolean page2;
+	private boolean page3;
+	private boolean page4;
+	private boolean page5;
+	private boolean page6;
+	private boolean page7;
+	private boolean page8;
+	private boolean page9;
+	
+	
 	@PostConstruct
 	public void init()
 	{
@@ -58,6 +75,15 @@ public class GDDBuildBeanImpl implements BaseBean
 		this.setSimplifiedGDDBuilder(new SimplifiedGDDBuilderImpl());
 		this.setESRBRatingService(new ESRBRatingServiceImpl());
 		this.setGamePlatformService(new GamePlatformServiceImpl());
+		page1 = true;
+		page2 = false;
+		page3 = false;
+		page4 = false;
+		page5 = false;
+		page6 = false;
+		page7 = false;
+		page8 = false;
+		page9 = false;
 	}
 
 	public SimplifiedGDDBuilder getSimplifiedGDDBuilder()
@@ -82,12 +108,58 @@ public class GDDBuildBeanImpl implements BaseBean
 
 	public void nextPage()
 	{
-		if (getPageNumber() == FINAL_PAGE /* || Possibly implement a method to check number of total pages */)
+		/*
+		if (getPageNumber() == FINAL_PAGE /* || Possibly implement a method to check number of total pages )
 		{
 
 		} else
 		{
 			setPageNumber(pageNumber + 1);
+		}*/
+		if (page1)
+		{
+			page1 = false;
+			page2 = true;
+		}
+		else if (page2)
+		{
+			page2 = false;
+			page3 = true;
+		}
+		else if (page3)
+		{
+			page3 = false;
+			page4 = true;
+		}
+		else if (page4)
+		{
+			page4= false;
+			page5 = true;
+		}
+		else if (page5)
+		{
+			page5= false;
+			page6 = true;
+		}
+		else if (page6)
+		{
+			page6= false;
+			page7 = true;
+		}
+		else if (page7)
+		{
+			page7= false;
+			page8 = true;
+		}
+		else if (page8)
+		{
+			page8= false;
+			page9 = true;
+		}
+		else if (page9)
+		{
+			page9= false;
+			page1 = true;
 		}
 	}
 
@@ -119,7 +191,7 @@ public class GDDBuildBeanImpl implements BaseBean
 		List<SelectItem> returnList = CommonUtils.getDefaultList();
 		for (ESRBRating esrbRating : esrbRatings)
 		{
-			returnList.add(new SelectItem(esrbRating, esrbRating.getRating()));
+			returnList.add(new SelectItem(esrbRating.getFullRating(), esrbRating.getRating()));
 		}
 		return returnList;
 	}
@@ -174,6 +246,96 @@ public class GDDBuildBeanImpl implements BaseBean
 	public String getCurrentPage()
 	{
 		return "build_" + getPageNumber() + CommonUtils.XHTML;
+	}
+
+	public boolean isPage1()
+	{
+		return page1;
+	}
+
+	public void setPage1(boolean page1)
+	{
+		this.page1 = page1;
+	}
+
+	public boolean isPage2()
+	{
+		return page2;
+	}
+
+	public void setPage2(boolean page2)
+	{
+		this.page2 = page2;
+	}
+
+	public boolean isPage3()
+	{
+		return page3;
+	}
+
+	public void setPage3(boolean page3)
+	{
+		this.page3 = page3;
+	}
+
+	public boolean isPage4()
+	{
+		return page4;
+	}
+
+	public void setPage4(boolean page4)
+	{
+		this.page4 = page4;
+	}
+
+	public boolean isPage5()
+	{
+		return page5;
+	}
+
+	public void setPage5(boolean page5)
+	{
+		this.page5 = page5;
+	}
+
+	public boolean isPage6()
+	{
+		return page6;
+	}
+
+	public void setPage6(boolean page6)
+	{
+		this.page6 = page6;
+	}
+
+	public boolean isPage7()
+	{
+		return page7;
+	}
+
+	public void setPage7(boolean page7)
+	{
+		this.page7 = page7;
+	}
+
+	public boolean isPage8()
+	{
+		return page8;
+	}
+
+	public void setPage8(boolean page8)
+	{
+		this.page8 = page8;
+	}
+
+	public boolean isPage9()
+	{
+		return page9;
+	}
+
+	public void setPage9(boolean page9)
+	{
+		this.page9 = page9;
 	}
 
 }

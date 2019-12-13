@@ -24,13 +24,15 @@ import com.emerald.gdd.services.model.ContactRecordService;
 @RequestScope
 public class CompanyContactBeanImpl implements CompanyContactBean
 {
-	private static final String	COMPLAINT		= "Complaint";
-	private static final String	SUGGESTION		= "Suggestion";
-	private static final String	OTHER			= "Other";
+	private static final String		COMPLAINT	= "Complaint";
+	private static final String		SUGGESTION	= "Suggestion";
+	private static final String		OTHER		= "Other";
+	private static final String		SUCCESS_MSG	= "Your Record was submitted successfully!";
+	private static final String		FAILURE_MSG	= "Your record errored out!";
 	@Autowired
-	private ContactRecord		contactRecord;
-	private boolean				reasonSelected;
-	private ContactRecordService contactRecordService;
+	private ContactRecord			contactRecord;
+	private boolean					reasonSelected;
+	private ContactRecordService	contactRecordService;
 
 	@PostConstruct
 	public void init()
@@ -46,20 +48,14 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 		helpList.add(new SelectItem(COMPLAINT, COMPLAINT));
 		helpList.add(new SelectItem(SUGGESTION, SUGGESTION));
 		helpList.add(new SelectItem(OTHER, OTHER));
-		/*
-		 * Here retrieve all helplist select items from the database to populate the UI
-		 */
 		return helpList;
 	}
 
 	public void save()
 	{
 		boolean sucess = false;
-		if (contactRecord != null)
-		{
-			sucess = contactRecordService.validateAndSaveContactRecord(contactRecord);
-		}
-		String message = (sucess) ? "Your Record was saved successfully!" : ("Your record errored out!");
+		sucess = contactRecordService.validateAndSaveContactRecord(contactRecord);
+		String message = (sucess) ? SUCCESS_MSG : FAILURE_MSG;
 		addPopUpMessage(message);
 		resetContactRecord();
 	}
@@ -67,13 +63,13 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	private void addPopUpMessage(String message)
 	{
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Result:", message));	
+		context.addMessage(null, new FacesMessage("Result:", message));
 	}
 
 	private void resetContactRecord()
 	{
 		contactRecord = null;
-		contactRecord = new ContactRecord();		
+		contactRecord = new ContactRecord();
 	}
 
 	public ContactRecord getContactRecord()
@@ -95,7 +91,7 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	{
 		this.reasonSelected = reasonSelected;
 	}
-	
+
 	public void revealTextBox()
 	{
 		setReasonSelected(true);

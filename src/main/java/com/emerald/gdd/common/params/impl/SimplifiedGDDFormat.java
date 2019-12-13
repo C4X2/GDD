@@ -20,7 +20,7 @@ public class SimplifiedGDDFormat implements GDD
 	private String					contactInfo;
 	private String					companyInfo;
 	private GamePlatform			targetedPlatform;
-	private ESRBRating				esrbRating;
+	private String				    esrbRating;
 	private String					targetAudience;
 	private Date					shipDate;
 	// Page 1 End
@@ -103,12 +103,12 @@ public class SimplifiedGDDFormat implements GDD
 		this.targetedPlatform = targetedPlatform;
 	}
 
-	public ESRBRating getEsrbRating()
+	public String getEsrbRating()
 	{
 		return esrbRating;
 	}
 
-	public void setEsrbRating(ESRBRating esrbRating)
+	public void setEsrbRating(String esrbRating)
 	{
 		this.esrbRating = esrbRating;
 	}

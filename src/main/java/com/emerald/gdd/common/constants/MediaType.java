@@ -5,5 +5,7 @@ public enum MediaType
 	BLUERAY,
 	CD,
 	MP3,
-	MP4
+	MP4,
+	NA,
+	DVD;
 }

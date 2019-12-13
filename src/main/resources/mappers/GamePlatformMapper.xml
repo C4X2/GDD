@@ -7,7 +7,7 @@
 		<result property="manufacturer"    column="manufacturer" />
 		<result property="website"         column="link_to_def" />
 		<result property="developer"       column="developer" />
-		<result property="mediaTypes"      column="media" />
+		<!--  <result property="mediaTypes"      column="media" /> -->
 		<result property="isCurrentSystem" column="is_current_system"/>
 		<result property="releaseDate"     column="created_date" />
 		<result property="createdDate"     column="created_date" />
@@ -17,5 +17,9 @@
 
 	<select id="selectAll" resultMap="GamePlatformMapperResult">
 		SELECT * FROM ENUM_GAME_PLATFORM;
+	</select>
+	
+	<select id="selectById" resultMap="GamePlatformMapperResult">
+		SELECT * FROM ENUM_GAME_PLATFORM WHERE name = #{name};
 	</select>
 </mapper>

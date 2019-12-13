@@ -98,7 +98,7 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating)
 	{
 		return setTargetedESRBRatingAs(getESRBRatingFromString(eSRBRating));
@@ -110,10 +110,10 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 		// LOOK SOMETHING LIKE
 		// ESRBRatingDAO.selectPlatformByPrimaryKey(targetedPlatform);
 		return null;
-	}
+	}*/
 
 	@Override
-	public SimplifiedGDDBuilder setTargetedESRBRatingAs(ESRBRating eSRBRating)
+	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating)
 	{
 		this.simplifiedGDDFormat.setEsrbRating(eSRBRating);
 		return this;

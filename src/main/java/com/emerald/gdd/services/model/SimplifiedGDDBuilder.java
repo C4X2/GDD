@@ -23,7 +23,7 @@ public interface SimplifiedGDDBuilder extends GDDBuilder
 
 	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating);
 
-	public SimplifiedGDDBuilder setTargetedESRBRatingAs(ESRBRating eSRBRating);
+	//public SimplifiedGDDBuilder setTargetedESRBRatingAs(ESRBRating eSRBRating);
 
 	public SimplifiedGDDBuilder setTargetedAudienceAs(String targetedAudience);
 

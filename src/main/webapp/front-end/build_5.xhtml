@@ -13,10 +13,10 @@
 <!-- BEGIN BUILD_5.XHTML -->
 <h:body>
 	<h:form>
-		<p:outputLabel for="@next" value="#{msg.outline_text}"></p:outputLabel>
+		<p:outputLabel for="@next" value="Explain how a player woud control the character"></p:outputLabel>
 		<br />
 		<br />
-		<p:inputTextarea value="#{TODO}" title="user_input" placeholder="#{msg.placeholder_user_input}" cols="30" counter="display" maxlength="1000" counterTemplate="{0} characters remaining." validatorMessage="Please shorten your message to under 1000 characters." rendered="true" />
+		<p:inputTextarea value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.characterControlSheme}" title="user_input" placeholder="#{msg.placeholder_user_input}" cols="30" counter="display" maxlength="1000" counterTemplate="{0} characters remaining." validatorMessage="Please shorten your message to under 1000 characters." rendered="true" />
     	<br />
     	<h:outputText id="display" />
 		<p:commandButton action="#{build.lastPage()}" value="Back" style="position:absolute;left:0;"  update="@all"></p:commandButton>
