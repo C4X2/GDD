@@ -28,8 +28,7 @@ public class GamePlatformServiceImpl implements GamePlatformService
 	@Override
 	public GamePlatform selectGamePlatformByName(String name)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return gamePlatformDAO.selectById(name);
 	}
     
 }

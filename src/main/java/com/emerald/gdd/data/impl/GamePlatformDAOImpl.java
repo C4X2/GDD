@@ -70,8 +70,7 @@ public class GamePlatformDAOImpl implements GamePlatformDAO
 	@Override
 	public GamePlatform select(GamePlatform gamePlatform)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return selectById(gamePlatform.getName());
 	}
 
 }

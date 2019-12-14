@@ -79,7 +79,7 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 	@Override
 	public SimplifiedGDDBuilder setTargetedGamePlatForm(GamePlatform targetedPlatform)
 	{
-		this.simplifiedGDDFormat.setTargetedPlatform(targetedPlatform);
+		this.simplifiedGDDFormat.setTargetedPlatform(targetedPlatform.getName());
 		return this;
 	}
 

@@ -19,7 +19,7 @@ public class SimplifiedGDDFormat implements GDD
 	private String					title;
 	private String					contactInfo;
 	private String					companyInfo;
-	private GamePlatform			targetedPlatform;
+	private String			        targetedPlatform;
 	private String				    esrbRating;
 	private String					targetAudience;
 	private Date					shipDate;
@@ -93,12 +93,12 @@ public class SimplifiedGDDFormat implements GDD
 		this.companyInfo = companyInfo;
 	}
 
-	public GamePlatform getTargetedPlatform()
+	public String getTargetedPlatform()
 	{
 		return targetedPlatform;
 	}
 
-	public void setTargetedPlatform(GamePlatform targetedPlatform)
+	public void setTargetedPlatform(String targetedPlatform)
 	{
 		this.targetedPlatform = targetedPlatform;
 	}

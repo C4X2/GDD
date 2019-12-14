@@ -16,62 +16,61 @@
 		<ui:include src="components/header.xhtml"></ui:include>
 	</ui:define>
 	<ui:define name="content">
-		<!--  <ui:include src="#{build.getCurrentPage()}"></ui:include> -->
 		<h2 style="text-align: center;">Ready to build your own GDD?</h2>
 		<h:form enctype="multipart/form-data">
-			<p:outputLabel for="@next" value="Primary Game Graphic"></p:outputLabel>
+			<p:outputLabel for="@next" value="Primary Game Graphic" rendered="#{build.isPageActive[1]}"></p:outputLabel>
 			<p:fileUpload
 				value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.graphic}"
 				listener="#{build.graphicUpload}"
-				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="#{build.page1}"></p:fileUpload>
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="#{build.isPageActive[1]}"></p:fileUpload>
 			<div class="container">
 				<div class="row">
-					<p:outputLabel for="@next" value="Game Title:" rendered="#{build.page1}"></p:outputLabel>&#160;
+					<p:outputLabel for="@next" value="Game Title:" rendered="#{build.isPageActive[1]}"></p:outputLabel>&#160;
 					<p:inputText required="required"
-						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.title}" rendered="#{build.page1}"></p:inputText>
+						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.title}" rendered="#{build.isPageActive[1]}"></p:inputText>
 					&#160; &#160;
-					<p:outputLabel for="@next" value="Your Name:" rendered="#{build.page1}"></p:outputLabel>&#160;
+					<p:outputLabel for="@next" value="Your Name:" rendered="#{build.isPageActive[1]}"></p:outputLabel>&#160;
 					<p:inputText
-						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.contactInfo}" rendered="#{build.page1}"></p:inputText>
+						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.contactInfo}" rendered="#{build.isPageActive[1]}"></p:inputText>
 					&#160; &#160;
-					<p:outputLabel for="@next" value="Your Company Name:" rendered="#{build.page1}"></p:outputLabel>&#160;
+					<p:outputLabel for="@next" value="Your Company Name:" rendered="#{build.isPageActive[1]}"></p:outputLabel>&#160;
 					<p:inputText
-						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.companyInfo}" rendered="#{build.page1}"></p:inputText>&#160; &#160;
+						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.companyInfo}" rendered="#{build.isPageActive[1]}"></p:inputText>&#160; &#160;
 				</div>
 				<div class="row">
 					<div class="col">
-						<p:outputLabel for="@next" value="Your Target Platform" rendered="#{build.page1}"></p:outputLabel>&#160;
+						<p:outputLabel for="@next" value="Your Target Platform" rendered="#{build.isPageActive[1]}"></p:outputLabel>&#160;
 						<p:selectOneMenu
-							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.targetedPlatform}" rendered="#{build.page1}" converter="targetedPlatformConverter">
+							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.targetedPlatform}" rendered="#{build.isPageActive[1]}" >
 							<f:selectItems value="#{build.gamePlatforms}"></f:selectItems>
 						</p:selectOneMenu> &#160; &#160;
 					</div>
 					<div class="col">
-						<p:outputLabel for="@next" value="Your Target ESRB Rating" rendered="#{build.page1}"></p:outputLabel> &#160;
+						<p:outputLabel for="@next" value="Your Target ESRB Rating" rendered="#{build.isPageActive[1]}"></p:outputLabel> &#160;
 						<p:selectOneMenu
-							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.esrbRating}" rendered="#{build.page1}">
+							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.esrbRating}" rendered="#{build.isPageActive[1]}">
 							<f:selectItems value="#{build.esrbRatings}"></f:selectItems>
 						</p:selectOneMenu> &#160; &#160;
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<p:outputLabel for="@next" value="Your Target Audience" rendered="#{build.page1}"></p:outputLabel>
+						<p:outputLabel for="@next" value="Your Target Audience" rendered="#{build.isPageActive[1]}"></p:outputLabel>
 						<p:inputText
-							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.targetAudience}" rendered="#{build.page1}"></p:inputText>
+							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.targetAudience}" rendered="#{build.isPageActive[1]}"></p:inputText>
 					</div>
 					<div class="col">
-						<p:outputLabel for="@next" value="Your Planned Ship Date" rendered="#{build.page1}"></p:outputLabel>
+						<p:outputLabel for="@next" value="Your Planned Ship Date" rendered="#{build.isPageActive[1]}"></p:outputLabel>
 						<p:calendar
-							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.shipDate}" rendered="#{build.page1}"></p:calendar>
+							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.shipDate}" rendered="#{build.isPageActive[1]}"></p:calendar>
 					</div>
 				</div>
 				<div class="row b2">
-					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.page2}"></p:outputLabel>
+					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.isPageActive[2]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="storyOutline_inputText"
-						rendered="#{build.page2}"
+						rendered="#{build.isPageActive[2]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.storyOutline}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="storyOutline" maxlength="1000"
@@ -79,16 +78,16 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="storyOutline" rendered="#{build.page2}"/>
+					<h:outputText id="storyOutline" rendered="#{build.isPageActive[2]}"/>
 					<br />
 				</div>
 				<div class="row b3">
 					<p:outputLabel for="@next"
-						value="Give the inspiration behind your game" rendered="#{build.page3}"></p:outputLabel>
+						value="Give the inspiration behind your game" rendered="#{build.isPageActive[3]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="gameInspirations_inputText"
-						rendered="#{build.page3}"
+						rendered="#{build.isPageActive[3]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.gameInspirations}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="gameInspirations" maxlength="1000"
@@ -96,7 +95,7 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="gameInspirations" rendered="#{build.page3}" />
+					<h:outputText id="gameInspirations" rendered="#{build.isPageActive[3]}" />
 				</div>
 				<!--  
 				<div class="row b4">
@@ -115,11 +114,11 @@
 				-->
 				<div class="row b5">
 					<p:outputLabel for="@next"
-						value="Explain how a player woud control the character" rendered="#{build.page5}"></p:outputLabel>
+						value="Explain how a player woud control the character" rendered="#{build.isPageActive[5]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="characterControlSheme_inputText"
-						rendered="#{build.page5}"
+						rendered="#{build.isPageActive[5]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.characterControlSheme}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="characterControlSheme" maxlength="1000"
@@ -127,15 +126,15 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="characterControlSheme" rendered="#{build.page5}" />
+					<h:outputText id="characterControlSheme" rendered="#{build.isPageActive[5]}" />
 				</div>
 				<div class="row b6">
 					<p:outputLabel for="@next"
-						value="How should players feel after playing your game?" rendered="#{build.page6}"></p:outputLabel>
+						value="How should players feel after playing your game?" rendered="#{build.isPageActive[6]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="playerExperienceGoal_inputText"
-						rendered="#{build.page6}"
+						rendered="#{build.isPageActive[6]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.playerExperienceGoal}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="playerExperienceGoal" maxlength="1000"
@@ -143,15 +142,15 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="playerExperienceGoal" rendered="#{build.page6}"/>
+					<h:outputText id="playerExperienceGoal" rendered="#{build.isPageActive[6]}"/>
 				</div>
 				<div class="row b7">
 					<p:outputLabel for="@next"
-						value="Give a brief overview of the different types of mechanics you would use in your game." rendered="#{build.page7}"></p:outputLabel>
+						value="Give a brief overview of the different types of mechanics you would use in your game." rendered="#{build.isPageActive[7]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="mechanics_inputText"
-						rendered="#{build.page7}"
+						rendered="#{build.isPageActive[7]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.mechanics}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="mechanics" maxlength="1000"
@@ -159,14 +158,14 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="mechanics" rendered="#{build.page7}"/>
+					<h:outputText id="mechanics" rendered="#{build.isPageActive[7]}"/>
 				</div>
 				<div class="row b8">
-					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.page8}"></p:outputLabel>
+					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.isPageActive[8]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="monetizationStrategy_inputText"
-						rendered="#{build.page8}"
+						rendered="#{build.isPageActive[8]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.monetizationStrategy}"
 						title="user_input" placeholder="#{msg.placeholder_user_input}"
 						cols="30" counter="monetizationStrategy" maxlength="1000"
@@ -174,9 +173,9 @@
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
 					<br />
-					<h:outputText id="monetizationStrategy" rendered="#{build.page8}" />
+					<h:outputText id="monetizationStrategy" rendered="#{build.isPageActive[8]}" />
 				</div>
-				<p:commandButton value="Build!" rendered="#{build.page9}"></p:commandButton>
+				<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" action="#{build.build()}"></p:commandButton>
 				<div class="row">
 					<p:commandButton action="#{build.lastPage()}" value="Back"
 						style="position:absolute;left:0;" update="@form"></p:commandButton>

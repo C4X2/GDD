@@ -3,6 +3,7 @@ package com.emerald.gdd.beans.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +14,6 @@ import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 
 import com.emerald.gdd.beans.model.BaseBean;
@@ -34,7 +34,7 @@ public class GDDBuildBeanImpl implements BaseBean
 {
 	private SimplifiedGDDBuilder	simplifiedGDDBuilder;
 	private GamePlatformService		gamePlatformService;
-	private Integer					pageNumber;
+	private Integer					pageNum;
 	private ESRBRatingService		eSRBRatingService;
 	/**
 	 * This is the first page in the scroll-able build content.
@@ -43,7 +43,7 @@ public class GDDBuildBeanImpl implements BaseBean
 	/**
 	 * This is the last page in the scroll-able build content.
 	 */
-	private final static Integer	FINAL_PAGE			= 9;
+	private final static Integer	FINAL_PAGE			= 10;
 	/**
 	 * This value is to prevent the user from making too many pages and overloading
 	 * the program. With the possibility to make 'infinite' characters, a bad actor
@@ -57,33 +57,22 @@ public class GDDBuildBeanImpl implements BaseBean
 	//* the UI.                                        *
 	//**************************************************
 	/////////////////////////////////////////////////////
-	private boolean page1;
-	private boolean page2;
-	private boolean page3;
-	private boolean page4;
-	private boolean page5;
-	private boolean page6;
-	private boolean page7;
-	private boolean page8;
-	private boolean page9;
-	
-	
+	private List<Boolean> isPageActive;
+
+
 	@PostConstruct
 	public void init()
 	{
-		setPageNumber(1);
+		setPageNum(1);
 		this.setSimplifiedGDDBuilder(new SimplifiedGDDBuilderImpl());
 		this.setESRBRatingService(new ESRBRatingServiceImpl());
 		this.setGamePlatformService(new GamePlatformServiceImpl());
-		page1 = true;
-		page2 = false;
-		page3 = false;
-		page4 = false;
-		page5 = false;
-		page6 = false;
-		page7 = false;
-		page8 = false;
-		page9 = false;
+		isPageActive = new ArrayList<Boolean> (FINAL_PAGE);
+		for (int i = 0; i < FINAL_PAGE; i++)
+		{
+			isPageActive.add(i, Boolean.FALSE);
+		}
+		showPage(FIRST_PAGE);
 	}
 
 	public SimplifiedGDDBuilder getSimplifiedGDDBuilder()
@@ -96,81 +85,35 @@ public class GDDBuildBeanImpl implements BaseBean
 		this.simplifiedGDDBuilder = simplifiedGDDBuilder;
 	}
 
-	public Integer getPageNumber()
+	public Integer getPageNum()
 	{
-		return pageNumber;
+		return pageNum;
 	}
 
-	public void setPageNumber(Integer pageNumber)
+	public void setPageNum(Integer pageNum)
 	{
-		this.pageNumber = pageNumber;
+		this.pageNum = pageNum;
 	}
 
 	public void nextPage()
 	{
-		/*
-		if (getPageNumber() == FINAL_PAGE /* || Possibly implement a method to check number of total pages )
+		/* || Possibly implement a method to check number of total pages*/ 
+		if (getPageNumber() == FINAL_PAGE - 1 )
 		{
 
 		} else
 		{
-			setPageNumber(pageNumber + 1);
-		}*/
-		if (page1)
-		{
-			page1 = false;
-			page2 = true;
-		}
-		else if (page2)
-		{
-			page2 = false;
-			page3 = true;
-		}
-		else if (page3)
-		{
-			page3 = false;
-			page4 = true;
-		}
-		else if (page4)
-		{
-			page4= false;
-			page5 = true;
-		}
-		else if (page5)
-		{
-			page5= false;
-			page6 = true;
-		}
-		else if (page6)
-		{
-			page6= false;
-			page7 = true;
-		}
-		else if (page7)
-		{
-			page7= false;
-			page8 = true;
-		}
-		else if (page8)
-		{
-			page8= false;
-			page9 = true;
-		}
-		else if (page9)
-		{
-			page9= false;
-			page1 = true;
+			setPageNum(pageNum + 1);
+			showPage(getPageNum());
 		}
 	}
 
 	public void lastPage()
 	{
-		if (getPageNumber() <= FIRST_PAGE)
+		if (!(getPageNum() <= FIRST_PAGE))
 		{
-			setPageNumber(FIRST_PAGE);
-		} else
-		{
-			setPageNumber(pageNumber - 1);
+			setPageNum(pageNum - 1);
+			showPage(getPageNum());
 		}
 	}
 
@@ -180,7 +123,7 @@ public class GDDBuildBeanImpl implements BaseBean
 		List<SelectItem> returnList = CommonUtils.getDefaultList();
 		for (GamePlatform gamePlatform : gamePlatforms)
 		{
-			returnList.add(new SelectItem(gamePlatform, gamePlatform.getName()));
+			returnList.add(new SelectItem(gamePlatform.getName(), gamePlatform.getName()));
 		}
 		return returnList;
 	}
@@ -215,7 +158,16 @@ public class GDDBuildBeanImpl implements BaseBean
 	{
 		this.gamePlatformService = gamePlatformService;
 	}
+	
+	public List<Boolean> getIsPageActive()
+	{
+		return isPageActive;
+	}
 
+	public void setIsPageActive(List<Boolean> isPageActive)
+	{
+		this.isPageActive = isPageActive;
+	}
 	public void graphicUpload(FileUploadEvent event)
 	{
 		System.out.println("Entering grahpicUpload method");
@@ -248,94 +200,30 @@ public class GDDBuildBeanImpl implements BaseBean
 		return "build_" + getPageNumber() + CommonUtils.XHTML;
 	}
 
-	public boolean isPage1()
-	{
-		return page1;
-	}
 
-	public void setPage1(boolean page1)
+	private void showPage(int pageNumber)
 	{
-		this.page1 = page1;
+		for (int i = 0; i < FINAL_PAGE; i++)
+		{
+			isPageActive.set(i, Boolean.FALSE);
+		}
+		isPageActive.set(pageNumber, Boolean.TRUE);
 	}
-
-	public boolean isPage2()
+	
+	private int getPageNumber()
 	{
-		return page2;
+		for(int i = 0; i < isPageActive.size(); i++)
+		{
+			if (isPageActive.get(i))
+			{
+				return i;
+			}
+		}
+		return FIRST_PAGE;
 	}
-
-	public void setPage2(boolean page2)
+	
+	public void build()
 	{
-		this.page2 = page2;
+		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
 	}
-
-	public boolean isPage3()
-	{
-		return page3;
-	}
-
-	public void setPage3(boolean page3)
-	{
-		this.page3 = page3;
-	}
-
-	public boolean isPage4()
-	{
-		return page4;
-	}
-
-	public void setPage4(boolean page4)
-	{
-		this.page4 = page4;
-	}
-
-	public boolean isPage5()
-	{
-		return page5;
-	}
-
-	public void setPage5(boolean page5)
-	{
-		this.page5 = page5;
-	}
-
-	public boolean isPage6()
-	{
-		return page6;
-	}
-
-	public void setPage6(boolean page6)
-	{
-		this.page6 = page6;
-	}
-
-	public boolean isPage7()
-	{
-		return page7;
-	}
-
-	public void setPage7(boolean page7)
-	{
-		this.page7 = page7;
-	}
-
-	public boolean isPage8()
-	{
-		return page8;
-	}
-
-	public void setPage8(boolean page8)
-	{
-		this.page8 = page8;
-	}
-
-	public boolean isPage9()
-	{
-		return page9;
-	}
-
-	public void setPage9(boolean page9)
-	{
-		this.page9 = page9;
-	}
-
 }
