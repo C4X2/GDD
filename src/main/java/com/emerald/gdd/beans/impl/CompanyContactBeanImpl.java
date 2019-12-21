@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 		this.reasonSelected = reasonSelected;
 	}
 
-	public void revealTextBox()
+	public void revealTextBox(ValueChangeEvent event)
 	{
 		setReasonSelected(true);
 	}

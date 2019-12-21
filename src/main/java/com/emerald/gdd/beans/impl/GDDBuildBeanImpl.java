@@ -3,16 +3,20 @@ package com.emerald.gdd.beans.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.util.Assert;
 
@@ -25,40 +29,46 @@ import com.emerald.gdd.services.model.ESRBRatingService;
 import com.emerald.gdd.services.impl.ESRBRatingServiceImpl;
 import com.emerald.gdd.services.impl.GamePlatformServiceImpl;
 import com.emerald.gdd.services.impl.SimplifiedGDDBuilderImpl;
+import com.emerald.gdd.services.impl.SimplifiedGDDFileOutBuilderImpl;
 import com.emerald.gdd.services.model.GamePlatformService;
 import com.emerald.gdd.services.model.SimplifiedGDDBuilder;
+import com.emerald.gdd.services.model.SimplifiedGDDFileOutBuilder;
 
 @ManagedBean(name = "build", eager = true)
 @SessionScoped
-public class GDDBuildBeanImpl implements BaseBean
+public class GDDBuildBeanImpl implements BaseBean, Serializable
 {
-	private SimplifiedGDDBuilder	simplifiedGDDBuilder;
-	private GamePlatformService		gamePlatformService;
-	private Integer					pageNum;
-	private ESRBRatingService		eSRBRatingService;
+
+	private static final long serialVersionUID = 1L;
+	private SimplifiedGDDBuilder		simplifiedGDDBuilder;
+	private SimplifiedGDDFileOutBuilder	simplifiedGDDFileOutBuilder;
+	private GamePlatformService			gamePlatformService;
+	private Integer						pageNum;
+	private ESRBRatingService			eSRBRatingService;
 	/**
 	 * This is the first page in the scroll-able build content.
 	 */
-	private final static Integer	FIRST_PAGE			= 1;
+	private final static Integer		FIRST_PAGE			= 1;
 	/**
 	 * This is the last page in the scroll-able build content.
 	 */
-	private final static Integer	FINAL_PAGE			= 10;
+	private final static Integer		FINAL_PAGE			= 10;
 	/**
 	 * This value is to prevent the user from making too many pages and overloading
 	 * the program. With the possibility to make 'infinite' characters, a bad actor
 	 * could in theory try to overload the system.
 	 */
-	private final static Integer	MAX_ALLOWABLE_PAGES	= 1000;
-	
-	/////////////////////////////////////////////////////
-	//**************************************************
-	//* The following booleans control what is seen on *
-	//* the UI.                                        *
-	//**************************************************
-	/////////////////////////////////////////////////////
-	private List<Boolean> isPageActive;
+	private final static Integer		MAX_ALLOWABLE_PAGES	= 1000;
+	private static final String			MISSING_MSG			= "You are missing some required fields. Please ensure that you have filled out the Title, the Story Outline, the Game Mechanics, the Player Experience Goal and the Monetization Strategy.";
+	private StreamedContent				resultFile;
 
+	/////////////////////////////////////////////////////
+	// **************************************************
+	// * The following booleans control what is seen on *
+	// * the UI. *
+	// **************************************************
+	/////////////////////////////////////////////////////
+	private List<Boolean>				isPageActive;
 
 	@PostConstruct
 	public void init()
@@ -67,7 +77,8 @@ public class GDDBuildBeanImpl implements BaseBean
 		this.setSimplifiedGDDBuilder(new SimplifiedGDDBuilderImpl());
 		this.setESRBRatingService(new ESRBRatingServiceImpl());
 		this.setGamePlatformService(new GamePlatformServiceImpl());
-		isPageActive = new ArrayList<Boolean> (FINAL_PAGE);
+		this.setSimplifiedGDDFileOutBuilder(new SimplifiedGDDFileOutBuilderImpl());
+		isPageActive = new ArrayList<Boolean>(FINAL_PAGE);
 		for (int i = 0; i < FINAL_PAGE; i++)
 		{
 			isPageActive.add(i, Boolean.FALSE);
@@ -75,33 +86,10 @@ public class GDDBuildBeanImpl implements BaseBean
 		showPage(FIRST_PAGE);
 	}
 
-	public SimplifiedGDDBuilder getSimplifiedGDDBuilder()
-	{
-		return simplifiedGDDBuilder;
-	}
-
-	public void setSimplifiedGDDBuilder(SimplifiedGDDBuilder simplifiedGDDBuilder)
-	{
-		this.simplifiedGDDBuilder = simplifiedGDDBuilder;
-	}
-
-	public Integer getPageNum()
-	{
-		return pageNum;
-	}
-
-	public void setPageNum(Integer pageNum)
-	{
-		this.pageNum = pageNum;
-	}
-
 	public void nextPage()
 	{
-		/* || Possibly implement a method to check number of total pages*/ 
-		if (getPageNumber() == FINAL_PAGE - 1 )
-		{
-
-		} else
+		/* || Possibly implement a method to check number of total pages */
+		if (getPageNumber() <= FINAL_PAGE - 1)
 		{
 			setPageNum(pageNum + 1);
 			showPage(getPageNum());
@@ -139,6 +127,113 @@ public class GDDBuildBeanImpl implements BaseBean
 		return returnList;
 	}
 
+	public void graphicUpload(FileUploadEvent event)
+	{
+		System.out.println("Entering grahpicUpload method");
+		Assert.notNull(event, "The file upload did not occur properly");
+		UploadedFile file = event.getFile();
+		System.out.println();
+		System.out.println(file.getFileName());
+		System.out.println();
+		BufferedImage bf = null;
+		try
+		{
+			bf = ImageIO.read((File) file);
+		} catch (IOException e)
+		{
+			System.out.println();
+			System.out.println("You lose sucker!");
+			System.out.println();
+		}
+	}
+
+	public List<SelectItem> getMediaTypes()
+	{
+		List<SelectItem> returnList = CommonUtils.getDefaultList();
+
+		return returnList;
+	}
+
+	public void build()
+	{
+		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
+		if (simplifiedGDDFormat == null)
+		{
+			addPopUpMessage(MISSING_MSG);
+			return;
+		}
+		setResultFile(this.simplifiedGDDFileOutBuilder
+				.toStreamedContent(this.simplifiedGDDFileOutBuilder.convertToDownloadFile(simplifiedGDDFormat)));
+		// TODO: refresh the context of the GDD
+	}
+
+	public void refresh()
+	{
+		this.pageNum = FIRST_PAGE;
+		this.simplifiedGDDBuilder = null;
+		this.simplifiedGDDBuilder = new SimplifiedGDDBuilderImpl();
+		showPage(FIRST_PAGE);
+	}
+
+	public String getCurrentPage()
+	{
+		return "build_" + getPageNumber() + CommonUtils.XHTML;
+	}
+
+	private void showPage(int pageNumber)
+	{
+		for (int i = 0; i < FINAL_PAGE; i++)
+		{
+			isPageActive.set(i, Boolean.FALSE);
+		}
+		isPageActive.set(pageNumber, Boolean.TRUE);
+	}
+
+	private int getPageNumber()
+	{
+		for (int i = 0; i < isPageActive.size(); i++)
+		{
+			if (isPageActive.get(i))
+			{
+				return i;
+			}
+		}
+		return FIRST_PAGE;
+	}
+
+	private void addPopUpMessage(String message)
+	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Result:", message));
+	}
+
+	public StreamedContent getResultFile()
+	{
+		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
+		return this.simplifiedGDDFileOutBuilder
+				.toStreamedContent(this.simplifiedGDDFileOutBuilder.convertToDownloadFile(simplifiedGDDFormat));
+		/*
+		if (resultFile == null)
+			build();
+		return resultFile;
+		*/
+	}
+
+	public void setResultFile(StreamedContent resultFile)
+	{
+		this.resultFile = resultFile;
+	}
+
+	public SimplifiedGDDFileOutBuilder getSimplifiedGDDFileOutBuilder()
+	{
+		return simplifiedGDDFileOutBuilder;
+	}
+
+	public void setSimplifiedGDDFileOutBuilder(SimplifiedGDDFileOutBuilder simplifiedGDDFileOutBuilder)
+	{
+		this.simplifiedGDDFileOutBuilder = simplifiedGDDFileOutBuilder;
+	}
+
 	public ESRBRatingService getESRBRatingService()
 	{
 		return this.eSRBRatingService;
@@ -158,7 +253,7 @@ public class GDDBuildBeanImpl implements BaseBean
 	{
 		this.gamePlatformService = gamePlatformService;
 	}
-	
+
 	public List<Boolean> getIsPageActive()
 	{
 		return isPageActive;
@@ -168,62 +263,24 @@ public class GDDBuildBeanImpl implements BaseBean
 	{
 		this.isPageActive = isPageActive;
 	}
-	public void graphicUpload(FileUploadEvent event)
+
+	public SimplifiedGDDBuilder getSimplifiedGDDBuilder()
 	{
-		System.out.println("Entering grahpicUpload method");
-		Assert.notNull(event, "The file upload did not occur properly");
-		UploadedFile file = event.getFile();
-		System.out.println();
-		System.out.println(file.getFileName());
-		System.out.println();
-		BufferedImage bf = null;
-		try {
-			bf = ImageIO.read((File) file);
-		}
-		catch(IOException e)
-		{
-			System.out.println();
-			System.out.println("You lose sucker!");
-			System.out.println();
-		}
+		return simplifiedGDDBuilder;
 	}
 
-	public List<SelectItem> getMediaTypes()
+	public void setSimplifiedGDDBuilder(SimplifiedGDDBuilder simplifiedGDDBuilder)
 	{
-		List<SelectItem> returnList = CommonUtils.getDefaultList();
-
-		return returnList;
+		this.simplifiedGDDBuilder = simplifiedGDDBuilder;
 	}
 
-	public String getCurrentPage()
+	public Integer getPageNum()
 	{
-		return "build_" + getPageNumber() + CommonUtils.XHTML;
+		return pageNum;
 	}
 
-
-	private void showPage(int pageNumber)
+	public void setPageNum(Integer pageNum)
 	{
-		for (int i = 0; i < FINAL_PAGE; i++)
-		{
-			isPageActive.set(i, Boolean.FALSE);
-		}
-		isPageActive.set(pageNumber, Boolean.TRUE);
-	}
-	
-	private int getPageNumber()
-	{
-		for(int i = 0; i < isPageActive.size(); i++)
-		{
-			if (isPageActive.get(i))
-			{
-				return i;
-			}
-		}
-		return FIRST_PAGE;
-	}
-	
-	public void build()
-	{
-		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
+		this.pageNum = pageNum;
 	}
 }

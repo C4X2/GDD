@@ -20,7 +20,6 @@
 		<h:form enctype="multipart/form-data">
 			<p:outputLabel for="@next" value="Primary Game Graphic" rendered="#{build.isPageActive[1]}"></p:outputLabel>
 			<p:fileUpload
-				value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.graphic}"
 				listener="#{build.graphicUpload}"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="#{build.isPageActive[1]}"></p:fileUpload>
 			<div class="container">
@@ -175,7 +174,10 @@
 					<br />
 					<h:outputText id="monetizationStrategy" rendered="#{build.isPageActive[8]}" />
 				</div>
-				<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" action="#{build.build()}"></p:commandButton>
+				<p:growl id="popup-growl" showDetail="true" sticky="false"></p:growl>
+				<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" update="@form" ajax="false">
+					<p:fileDownload value="#{build.resultFile}"></p:fileDownload>
+				</p:commandButton>
 				<div class="row">
 					<p:commandButton action="#{build.lastPage()}" value="Back"
 						style="position:absolute;left:0;" update="@form"></p:commandButton>

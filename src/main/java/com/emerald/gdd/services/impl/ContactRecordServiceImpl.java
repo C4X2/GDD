@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.springframework.util.StringUtils;
+
 import com.emerald.gdd.common.params.impl.ContactRecord;
 import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.impl.ContactRecordDAOImpl;
@@ -24,7 +26,7 @@ public class ContactRecordServiceImpl implements ContactRecordService
 	@Override
 	public boolean validateAndSaveContactRecord(ContactRecord record)
 	{
-		if (record == null || record.getReason().equalsIgnoreCase(CommonUtils.PLEASE_SELECT))
+		if (record == null || !StringUtils.hasText(record.getReason()) || !StringUtils.hasText(record.getComment()))
 		{
 			return false;
 		}

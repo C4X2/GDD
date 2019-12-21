@@ -20,22 +20,17 @@
 		<br />
 		<ui:define name="content">
 		    <p:accordionPanel>
-		    	<p:tab title="Welcome!">
-		    		<p style="text-align:center;"><h:outputText value="Ready to make your GDD?"></h:outputText></p>
+		    	<p:tab title="#{msg.welcome}">
+		    		<p style="text-align:center;"><h:outputText value="#{msg.ready_gdd}"></h:outputText></p>
 		    	</p:tab>
-		        <p:tab title="What is a GDD?">
+		        <p:tab title="#{msg.gdd_question}">
 		            <h:panelGrid columns="2" cellpadding="10">
 		                <h:outputText value="#{msg.gddComment}" ></h:outputText>
 		            </h:panelGrid>
 		        </p:tab>
 		        <p:tab title="GVD">
 		            <h:panelGrid columns="2" cellpadding="10">
-		                <h:outputText value="
-		                	For those who prefer a more agile approach to development, a game vision document might be more important/helpful.
-		                	A game vision document does not get bogged down in the technical requirements of the GDD, instead prefering to state
-		                	clear and attenable goals for a game to meet and letting each one of the organizations teams define for themselves the most
-		                	effective way to reach those goals. This approach require a lot more collaboration but has the benefit of less documentation.
-		                " ></h:outputText>
+		                <h:outputText value="#{msg.gvd}" ></h:outputText>
 		            </h:panelGrid>
 		        </p:tab>
     		</p:accordionPanel>

@@ -17,7 +17,7 @@ import com.emerald.gdd.services.impl.MessageManagerImpl;
  * #{msg.key_value}. This class assumes a JSF environment!
  *
  * @author C4X2
- * @version 2.1
+ * @version 2.2
  */
 @ManagedBean(name = "msg", eager = true)
 @ApplicationScoped()

@@ -1,8 +1,10 @@
 package com.emerald.gdd;
 
+import java.util.EnumSet;
+
 import javax.faces.webapp.FacesServlet;
-import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
+import javax.servlet.DispatcherType;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -46,7 +48,9 @@ public class GDDApplication extends FacesInitializer implements ServletContextAw
 		// Set attributes to run PrimeFaces properly
 		servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
 		servletContext.setInitParameter("primefaces.THEME", BOOTSTRAP);
-		servletContext.setInitParameter("primefaces.UPLOADER", "commons");
+		servletContext.setInitParameter("primefaces.UPLOADER", "common");
+		EnumSet<DispatcherType> enumSet = EnumSet.of(DispatcherType.ASYNC,DispatcherType.INCLUDE);
+		//servletContext.addFilter("PrimeFaces FileUpload Filter", "org.primefaces.webapp.filter.FileUploadFilter").addMappingForServletNames(enumSet, false, "Faces Servlet");
 	}
 
 }

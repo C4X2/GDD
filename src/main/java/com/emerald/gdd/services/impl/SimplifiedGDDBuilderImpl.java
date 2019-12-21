@@ -1,6 +1,8 @@
 package com.emerald.gdd.services.impl;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -22,7 +24,7 @@ import com.emerald.gdd.services.model.SimplifiedGDDBuilder;
 public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 {
 	private SimplifiedGDDFormat simplifiedGDDFormat;
-	
+
 	public SimplifiedGDDBuilderImpl()
 	{
 		this.simplifiedGDDFormat = new SimplifiedGDDFormat();
@@ -98,19 +100,15 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 		return null;
 	}
 
-	/*@Override
-	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating)
-	{
-		return setTargetedESRBRatingAs(getESRBRatingFromString(eSRBRating));
-	}
-
-	private ESRBRating getESRBRatingFromString(String eSRBRating)
-	{
-		// TODO: FIND A ESRBRating BASED OFF KEY
-		// LOOK SOMETHING LIKE
-		// ESRBRatingDAO.selectPlatformByPrimaryKey(targetedPlatform);
-		return null;
-	}*/
+	/*
+	 * @Override public SimplifiedGDDBuilder setTargetedESRBRatingAs(String
+	 * eSRBRating) { return
+	 * setTargetedESRBRatingAs(getESRBRatingFromString(eSRBRating)); }
+	 *
+	 * private ESRBRating getESRBRatingFromString(String eSRBRating) { // TODO: FIND
+	 * A ESRBRating BASED OFF KEY // LOOK SOMETHING LIKE //
+	 * ESRBRatingDAO.selectPlatformByPrimaryKey(targetedPlatform); return null; }
+	 */
 
 	@Override
 	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating)
