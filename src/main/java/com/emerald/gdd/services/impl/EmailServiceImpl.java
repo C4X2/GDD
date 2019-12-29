@@ -34,7 +34,7 @@ public class EmailServiceImpl implements EmailService, EmeraldEmailConstants
 			emailAttachment.setPath(attachment.getAbsolutePath());
 			emailAttachment.setDisposition(EmailAttachment.ATTACHMENT);
 			emailAttachment.setDescription(GDD_FILE);
-			emailAttachment.setName(GDD_FILE);
+			emailAttachment.setName(attachment.getName().isEmpty() ? GDD_FILE : attachment.getName());
 		}
 		// Create the email
 		try
