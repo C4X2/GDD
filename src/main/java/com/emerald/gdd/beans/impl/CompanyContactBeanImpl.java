@@ -28,7 +28,7 @@ public class CompanyContactBeanImpl implements CompanyContactBean
 	private static final String		COMPLAINT	= "Complaint";
 	private static final String		SUGGESTION	= "Suggestion";
 	private static final String		OTHER		= "Other";
-	private static final String		SUCCESS_MSG	= "Your Record was submitted successfully!";
+	private static final String		SUCCESS_MSG	= "Your record was submitted successfully!";
 	private static final String		FAILURE_MSG	= "Your record errored out!";
 	@Autowired
 	private ContactRecord			contactRecord;

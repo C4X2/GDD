@@ -39,6 +39,10 @@ dependencies {
 	compile 'org.primefaces.themes:bootstrap:1.0.10'
 	// https://mvnrepository.com/artifact/org.primefaces.themes/all-themes
 	compile group: 'org.primefaces.themes', name: 'all-themes', version: '1.0.10'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-email
+	compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+
+
 }
 
 test {

@@ -3,7 +3,6 @@ package com.emerald.gdd.beans.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.util.Assert;
 
@@ -26,7 +24,9 @@ import com.emerald.gdd.common.params.impl.GamePlatform;
 import com.emerald.gdd.common.params.impl.SimplifiedGDDFormat;
 import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.services.model.ESRBRatingService;
+import com.emerald.gdd.services.model.EmailService;
 import com.emerald.gdd.services.impl.ESRBRatingServiceImpl;
+import com.emerald.gdd.services.impl.EmailServiceImpl;
 import com.emerald.gdd.services.impl.GamePlatformServiceImpl;
 import com.emerald.gdd.services.impl.SimplifiedGDDBuilderImpl;
 import com.emerald.gdd.services.impl.SimplifiedGDDFileOutBuilderImpl;
@@ -36,31 +36,33 @@ import com.emerald.gdd.services.model.SimplifiedGDDFileOutBuilder;
 
 @ManagedBean(name = "build", eager = true)
 @SessionScoped
-public class GDDBuildBeanImpl implements BaseBean, Serializable
+public class GDDBuildBeanImpl implements BaseBean
 {
 
-	private static final long serialVersionUID = 1L;
 	private SimplifiedGDDBuilder		simplifiedGDDBuilder;
 	private SimplifiedGDDFileOutBuilder	simplifiedGDDFileOutBuilder;
 	private GamePlatformService			gamePlatformService;
 	private Integer						pageNum;
 	private ESRBRatingService			eSRBRatingService;
+	private EmailService				emailService;
 	/**
 	 * This is the first page in the scroll-able build content.
 	 */
-	private final static Integer		FIRST_PAGE			= 1;
+	private final static Integer		FIRST_PAGE				= 1;
 	/**
 	 * This is the last page in the scroll-able build content.
 	 */
-	private final static Integer		FINAL_PAGE			= 10;
+	private final static Integer		FINAL_PAGE				= 10;
 	/**
 	 * This value is to prevent the user from making too many pages and overloading
 	 * the program. With the possibility to make 'infinite' characters, a bad actor
 	 * could in theory try to overload the system.
 	 */
-	private final static Integer		MAX_ALLOWABLE_PAGES	= 1000;
-	private static final String			MISSING_MSG			= "You are missing some required fields. Please ensure that you have filled out the Title, the Story Outline, the Game Mechanics, the Player Experience Goal and the Monetization Strategy.";
-	private StreamedContent				resultFile;
+	private final static Integer		MAX_ALLOWABLE_PAGES		= 1000;
+	private static final String			MISSING_MSG				= "You are missing some required fields. Please ensure that you have filled out the Title, the Story Outline, the Game Mechanics, the Player Experience Goal and the Monetization Strategy.";
+	private static final String			VALID_EMAIL_REQUEST		= "Please add a real email!";
+	private static final String			SUCESSFULLY_SENT_EMAIL	= "An email was successfully sent to: ";
+	private static final String			INBOX					= "Please check your inbox";
 
 	/////////////////////////////////////////////////////
 	// **************************************************
@@ -78,6 +80,7 @@ public class GDDBuildBeanImpl implements BaseBean, Serializable
 		this.setESRBRatingService(new ESRBRatingServiceImpl());
 		this.setGamePlatformService(new GamePlatformServiceImpl());
 		this.setSimplifiedGDDFileOutBuilder(new SimplifiedGDDFileOutBuilderImpl());
+		this.setEmailService(new EmailServiceImpl());
 		isPageActive = new ArrayList<Boolean>(FINAL_PAGE);
 		for (int i = 0; i < FINAL_PAGE; i++)
 		{
@@ -162,22 +165,26 @@ public class GDDBuildBeanImpl implements BaseBean, Serializable
 			addPopUpMessage(MISSING_MSG);
 			return;
 		}
-		setResultFile(this.simplifiedGDDFileOutBuilder
-				.toStreamedContent(this.simplifiedGDDFileOutBuilder.convertToDownloadFile(simplifiedGDDFormat)));
-		// TODO: refresh the context of the GDD
+		String email = emailService.getUserEmail();
+		if (!emailService.validateEmail(email))
+		{
+			addPopUpMessage(VALID_EMAIL_REQUEST);
+			return;
+		}
+
+		emailService.send(email, this.simplifiedGDDFileOutBuilder.convertToDownloadFile(simplifiedGDDFormat));
+
+		refresh();
+
+		addPopUpMessage(SUCESSFULLY_SENT_EMAIL + email + " " + INBOX);
 	}
 
 	public void refresh()
 	{
 		this.pageNum = FIRST_PAGE;
-		this.simplifiedGDDBuilder = null;
 		this.simplifiedGDDBuilder = new SimplifiedGDDBuilderImpl();
+		this.emailService = new EmailServiceImpl();
 		showPage(FIRST_PAGE);
-	}
-
-	public String getCurrentPage()
-	{
-		return "build_" + getPageNumber() + CommonUtils.XHTML;
 	}
 
 	private void showPage(int pageNumber)
@@ -205,23 +212,6 @@ public class GDDBuildBeanImpl implements BaseBean, Serializable
 	{
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Result:", message));
-	}
-
-	public StreamedContent getResultFile()
-	{
-		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
-		return this.simplifiedGDDFileOutBuilder
-				.toStreamedContent(this.simplifiedGDDFileOutBuilder.convertToDownloadFile(simplifiedGDDFormat));
-		/*
-		if (resultFile == null)
-			build();
-		return resultFile;
-		*/
-	}
-
-	public void setResultFile(StreamedContent resultFile)
-	{
-		this.resultFile = resultFile;
 	}
 
 	public SimplifiedGDDFileOutBuilder getSimplifiedGDDFileOutBuilder()
@@ -282,5 +272,15 @@ public class GDDBuildBeanImpl implements BaseBean, Serializable
 	public void setPageNum(Integer pageNum)
 	{
 		this.pageNum = pageNum;
+	}
+
+	public EmailService getEmailService()
+	{
+		return emailService;
+	}
+
+	public void setEmailService(EmailService emailService)
+	{
+		this.emailService = emailService;
 	}
 }

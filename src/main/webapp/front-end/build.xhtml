@@ -18,9 +18,11 @@
 	<ui:define name="content">
 		<h2 style="text-align: center;">Ready to build your own GDD?</h2>
 		<h:form enctype="multipart/form-data">
-			<p:outputLabel for="@next" value="Primary Game Graphic" rendered="#{build.isPageActive[1]}"></p:outputLabel>
-			<p:fileUpload
+			<p:fileUpload 
 				listener="#{build.graphicUpload}"
+				mode="advanced" dragDropSupport="false"
+				fileLimit="1" sizeLimit="1000000"
+				label="Primary Game Graphic"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" rendered="#{build.isPageActive[1]}"></p:fileUpload>
 			<div class="container">
 				<div class="row">
@@ -174,21 +176,30 @@
 					<br />
 					<h:outputText id="monetizationStrategy" rendered="#{build.isPageActive[8]}" />
 				</div>
-				<p:growl id="popup-growl" showDetail="true" sticky="false"></p:growl>
-				<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" update="@form" ajax="false">
-					<p:fileDownload value="#{build.resultFile}"></p:fileDownload>
-				</p:commandButton>
+				<div class="row">
+					<p:growl id="popup-growl" showDetail="true" sticky="false"></p:growl>
+					<p:outputLabel for="@next" value="Your Email. The document will be sent here." rendered="#{build.isPageActive[9]}"></p:outputLabel>
+					<p:inputText
+						value="#{build.emailService.userEmail}" rendered="#{build.isPageActive[9]}"></p:inputText>
+					&#160; &#160;
+					<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" action="#{build.build}" update="popup-growl,@form" ></p:commandButton>
+				</div>
 				<div class="row">
 					<p:commandButton action="#{build.lastPage()}" value="Back"
 						style="position:absolute;left:0;" update="@form"></p:commandButton>
 					<p:commandButton action="#{build.nextPage()}" value="Next"
 						style="position:absolute;right:0;" update="@form"></p:commandButton>
+					<div style="text-align:center;">
+						<p:commandButton action="#{build.refresh()}" value="Refresh" update="@form"
+							style="position:absolute;center:0;"></p:commandButton>
+					</div>
 				</div>
 			</div>
 		</h:form>
 	</ui:define>
 	<ui:define name="footer">
-		<ui:include src="components/footer.xhtml"></ui:include>
+		<div></div>
+		<!--  <ui:include src="components/footer.xhtml"></ui:include> -->
 	</ui:define>
 </ui:composition>
 <!-- END BUILD.XHTML -->

@@ -43,6 +43,7 @@ public class SimplifiedGDDFileOutBuilderImpl implements SimplifiedGDDFileOutBuil
 			if (rtrnVal.canWrite())
 			{
 				pw = new PrintWriter(rtrnVal);
+				// Finish writing the entire GDD
 				pw.write(input.getTitle());
 			}
 

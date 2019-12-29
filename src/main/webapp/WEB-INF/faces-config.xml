@@ -43,6 +43,16 @@
       	<!-- Declare properties of the managed bean to be injected -->
    	</managed-bean>
    	<managed-bean>
+   		<managed-bean-name>filer</managed-bean-name>
+   		<managed-bean-class>com.emerald.gdd.beans.impl.SimplifiedGDDFileOutBuilderBean</managed-bean-class>
+   		<managed-bean-scope>request</managed-bean-scope>
+   		<managed-property>
+   			<property-name>gDDBuildBeanImpl</property-name>
+   			<property-class>com.emerald.gdd.beans.impl.GDDBuildBeanImpl</property-class>
+   			<value>#{build}</value>
+   		</managed-property>
+   	</managed-bean>
+   	<managed-bean>
    		<managed-bean-name>simplifiedGDDFormat</managed-bean-name>
    		<managed-bean-class>com.emerald.gdd.common.params.impl.SimplifiedGDDFormat</managed-bean-class>
    		<managed-bean-scope>session</managed-bean-scope>
@@ -54,10 +64,7 @@
    <!-- END NAVIGATION RULES -->
    
    <!-- CONVERTERS -->
-   <converter>
-   	<converter-id>targetedPlatformConverter</converter-id>
-   	<converter-class>com.emerald.gdd.common.converters.TargetedPlatformConverter</converter-class>
-   </converter>
+
    <!-- END CONVERTERS -->
 
 </faces-config>
