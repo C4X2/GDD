@@ -1,6 +1,5 @@
 package com.emerald.gdd.services.impl;
 
-
 import com.emerald.gdd.common.params.impl.Message;
 import com.emerald.gdd.data.impl.MessageRegistryDAOImpl;
 import com.emerald.gdd.data.model.MessageRegistryDAO;
@@ -8,9 +7,7 @@ import com.emerald.gdd.services.model.MessageRegistryService;
 
 public class MessageRegistryServiceImpl implements MessageRegistryService
 {
-
 	private MessageRegistryDAO messageRegistryDAO;
-	
 
 	public MessageRegistryServiceImpl()
 	{
@@ -28,5 +25,4 @@ public class MessageRegistryServiceImpl implements MessageRegistryService
 	{
 		return (record == null) ? false : (messageRegistryDAO.insert(record) > 0);
 	}
-	
 }

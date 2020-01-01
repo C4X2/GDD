@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import org.apache.ibatis.io.Resources;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.emerald.gdd.common.params.impl.Message;
 import com.emerald.gdd.services.model.MessageManager;
@@ -84,5 +86,4 @@ public final class MessageManagerImpl implements MessageManager
 		record.setDescription(message);
 		return messageRegistryService.insertMessage(record);
 	}
-
 }

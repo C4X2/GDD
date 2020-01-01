@@ -17,8 +17,4 @@ public interface EmailService
 	public boolean validateEmail(String email);
 
 	public void send(String email, File attachment);
-
-	public void setUserEmail(String email);
-
-	public String getUserEmail();
 }

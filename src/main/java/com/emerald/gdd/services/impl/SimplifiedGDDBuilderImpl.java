@@ -1,34 +1,28 @@
 package com.emerald.gdd.services.impl;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.emerald.gdd.common.params.impl.CharacterDesignTemplate;
-import com.emerald.gdd.common.params.impl.ESRBRating;
 import com.emerald.gdd.common.params.impl.GamePlatform;
 import com.emerald.gdd.common.params.impl.SimplifiedGDDFormat;
 import com.emerald.gdd.common.params.model.GDD;
 
 import com.emerald.gdd.services.model.SimplifiedGDDBuilder;
 
+@Component
 public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 {
+	@Autowired
 	private SimplifiedGDDFormat simplifiedGDDFormat;
-
-	public SimplifiedGDDBuilderImpl()
-	{
-		this.simplifiedGDDFormat = new SimplifiedGDDFormat();
-	}
 
 	@Override
 	public boolean hasSufficientCriteria()
@@ -99,16 +93,6 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 		// GAMEPLATFORMDAO.selectPlatformByPrimaryKey(targetedPlatform);
 		return null;
 	}
-
-	/*
-	 * @Override public SimplifiedGDDBuilder setTargetedESRBRatingAs(String
-	 * eSRBRating) { return
-	 * setTargetedESRBRatingAs(getESRBRatingFromString(eSRBRating)); }
-	 *
-	 * private ESRBRating getESRBRatingFromString(String eSRBRating) { // TODO: FIND
-	 * A ESRBRating BASED OFF KEY // LOOK SOMETHING LIKE //
-	 * ESRBRatingDAO.selectPlatformByPrimaryKey(targetedPlatform); return null; }
-	 */
 
 	@Override
 	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating)
@@ -201,6 +185,11 @@ public class SimplifiedGDDBuilderImpl implements SimplifiedGDDBuilder
 	public void setSimplifiedGDDFormat(SimplifiedGDDFormat simplifiedGDDFormat)
 	{
 		this.simplifiedGDDFormat = simplifiedGDDFormat;
+	}
+
+	public void refresh()
+	{
+		this.simplifiedGDDFormat = new SimplifiedGDDFormat();
 	}
 
 }

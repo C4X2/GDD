@@ -5,9 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.emerald.gdd.common.params.impl.CharacterDesignTemplate;
-import com.emerald.gdd.common.params.impl.ESRBRating;
 import com.emerald.gdd.common.params.impl.GamePlatform;
-
 
 public interface SimplifiedGDDBuilder extends GDDBuilder
 {
@@ -18,12 +16,12 @@ public interface SimplifiedGDDBuilder extends GDDBuilder
 	public SimplifiedGDDBuilder setCompanyName(String companyName);
 
 	public SimplifiedGDDBuilder setTargetedGamePlatForm(String targetedPlatform);
-	
+
 	public SimplifiedGDDBuilder setTargetedGamePlatForm(GamePlatform targetedPlatform);
 
 	public SimplifiedGDDBuilder setTargetedESRBRatingAs(String eSRBRating);
 
-	//public SimplifiedGDDBuilder setTargetedESRBRatingAs(ESRBRating eSRBRating);
+	// public SimplifiedGDDBuilder setTargetedESRBRatingAs(ESRBRating eSRBRating);
 
 	public SimplifiedGDDBuilder setTargetedAudienceAs(String targetedAudience);
 
@@ -44,13 +42,7 @@ public interface SimplifiedGDDBuilder extends GDDBuilder
 	public SimplifiedGDDBuilder defineAControlScheme(String mechanics);
 
 	public SimplifiedGDDBuilder defineAMonetizationStrategy(String monetizationStrategy);
-	/*
-	public String getGamePlaform();
 	
-	public void setGamePlaform();
-	
-	public String getAudience();
-	
-	public void setAudience();*/
+	public void refresh();
 
 }

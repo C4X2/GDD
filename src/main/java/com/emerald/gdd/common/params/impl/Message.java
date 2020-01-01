@@ -3,7 +3,7 @@ package com.emerald.gdd.common.params.impl;
 import java.util.Date;
 
 /**
- * A parameter representing any text that is desplayed on the screen.
+ * A parameter representing any text that is displayed on the screen.
  * 
  * @author C4X2
  * @version 1.0

@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.emerald.gdd.common.params.model.GDD;
 
 /**
@@ -12,6 +14,7 @@ import com.emerald.gdd.common.params.model.GDD;
  * @author C4X2
  * @version 1.0
  */
+@Component
 public class SimplifiedGDDFormat implements GDD
 {
 	// Page 1 Begin

@@ -20,11 +20,6 @@ public class ContactRecord
 	private Date	updateDate;
 	private Date	retiredDate;
 
-	public ContactRecord()
-	{
-		comment = "";
-	}
-
 	public String getReason()
 	{
 		return reason;

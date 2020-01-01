@@ -7,12 +7,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import com.emerald.gdd.common.params.impl.ESRBRating;
-import com.emerald.gdd.common.params.impl.Message;
 import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.model.ESRBRatingDAO;
 
+@Component
 public class ESRBRatingDAOImpl implements ESRBRatingDAO
 {
 
@@ -31,8 +32,7 @@ public class ESRBRatingDAOImpl implements ESRBRatingDAO
 		{
 			e.printStackTrace();
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{
@@ -41,6 +41,7 @@ public class ESRBRatingDAOImpl implements ESRBRatingDAO
 		}
 		return null;
 	}
+
 	@Override
 	public ESRBRating selectById(String id)
 	{
@@ -56,8 +57,7 @@ public class ESRBRatingDAOImpl implements ESRBRatingDAO
 		{
 			e.printStackTrace();
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{
@@ -82,8 +82,7 @@ public class ESRBRatingDAOImpl implements ESRBRatingDAO
 		} catch (Exception e)
 		{
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{

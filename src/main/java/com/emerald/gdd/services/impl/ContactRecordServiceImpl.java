@@ -3,25 +3,20 @@ package com.emerald.gdd.services.impl;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.emerald.gdd.common.params.impl.ContactRecord;
-import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.impl.ContactRecordDAOImpl;
 import com.emerald.gdd.data.model.ContactRecordDAO;
 import com.emerald.gdd.services.model.ContactRecordService;
 
+@Component
 public class ContactRecordServiceImpl implements ContactRecordService
 {
+	@Autowired
 	private ContactRecordDAO contactRecordDAO;
-
-	public ContactRecordServiceImpl()
-	{
-		setContactRecordDAO(new ContactRecordDAOImpl());
-	}
 
 	@Override
 	public boolean validateAndSaveContactRecord(ContactRecord record)

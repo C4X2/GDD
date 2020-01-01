@@ -3,6 +3,8 @@ package com.emerald.gdd.common.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 /**
@@ -28,5 +30,22 @@ public class CommonUtils
 		List<SelectItem> returnList = new ArrayList<SelectItem>();
 		returnList.add(new SelectItem(null, PLEASE_SELECT));
 		return returnList;
+	}
+
+	/**
+	 * Adds a message to the current Faces Context such that a pop-up will appear on
+	 * the UI.
+	 * 
+	 * @param title the title of the Faces pop-up message. Usually bolded.
+	 * @param message the primary message of the Faces message. should not be null.
+	 */
+	public static void addPopUpMessage(String title, String message)
+	{
+		if (message == null)
+		{
+			return;
+		}
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(title, message));
 	}
 }

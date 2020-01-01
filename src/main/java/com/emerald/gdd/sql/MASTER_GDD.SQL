@@ -37,7 +37,9 @@ VALUES ("homepage","The header shown on the top of the webpage", "Game Desgin Do
 		                	effective way to reach those goals. This approach require a lot more collaboration but has the benefit of less documentation.", CURDATE()),
   ("welcome", "Welcome message", "Welcome!", CURDATE()),
   ("ready_gdd", "" , "Ready to make your GDD?", CURDATE()),
-  ("gdd_question", "", "What is a GDD?", CURDATE());
+  ("gdd_question", "", "What is a GDD?", CURDATE()),
+  ("monetization", "Prompt user to decided monetization strategy.", "What is your monetization strategy?", CURDATE()),
+  ("help_you_with", "What can we help you with?", "What can we help you with?", CURDATE());
 -- END MESSAGE_REGISTRY ENTRIES --
 
 -- START LICENSE TABLE DEFINITION --

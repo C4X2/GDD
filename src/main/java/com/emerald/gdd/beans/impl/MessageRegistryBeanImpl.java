@@ -1,12 +1,15 @@
 package com.emerald.gdd.beans.impl;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.emerald.gdd.beans.model.MessageRegistryBean;
 import com.emerald.gdd.services.impl.MessageManagerImpl;
@@ -17,22 +20,16 @@ import com.emerald.gdd.services.impl.MessageManagerImpl;
  * #{msg.key_value}. This class assumes a JSF environment!
  *
  * @author C4X2
- * @version 2.2
+ * @version 3.2
  */
-@ManagedBean(name = "msg", eager = true)
-@ApplicationScoped()
+@Component(value = "msg")
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class MessageRegistryBeanImpl implements MessageRegistryBean, Map
 {
-
-	public MessageRegistryBeanImpl()
-	{
-
-	}
 
 	@Override
 	public int size()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -53,8 +50,7 @@ public class MessageRegistryBeanImpl implements MessageRegistryBean, Map
 	@Override
 	public boolean containsValue(Object value)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("At this time the containsValue() opeation has not been defined");
 	}
 
 	@Override
@@ -95,22 +91,19 @@ public class MessageRegistryBeanImpl implements MessageRegistryBean, Map
 	@Override
 	public Set keySet()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("At this time the keySet() opeation has not been defined");
 	}
 
 	@Override
 	public Collection values()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("At this time the values() opeation has not been defined");
 	}
 
 	@Override
 	public Set entrySet()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("At this time the entrySet() opeation has not been defined");
 	}
 
 }

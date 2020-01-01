@@ -6,11 +6,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import com.emerald.gdd.common.params.impl.ContactRecord;
 import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.model.ContactRecordDAO;
-
+@Component
 public class ContactRecordDAOImpl implements ContactRecordDAO
 {
 

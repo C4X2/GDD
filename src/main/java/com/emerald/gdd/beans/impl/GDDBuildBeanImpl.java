@@ -16,6 +16,9 @@ import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import com.emerald.gdd.beans.model.BaseBean;
@@ -34,17 +37,22 @@ import com.emerald.gdd.services.model.GamePlatformService;
 import com.emerald.gdd.services.model.SimplifiedGDDBuilder;
 import com.emerald.gdd.services.model.SimplifiedGDDFileOutBuilder;
 
-@ManagedBean(name = "build", eager = true)
-@SessionScoped
+@Component(value = "build")
+@Scope("session")
 public class GDDBuildBeanImpl implements BaseBean
 {
-
+	@Autowired
 	private SimplifiedGDDBuilder		simplifiedGDDBuilder;
+	@Autowired
 	private SimplifiedGDDFileOutBuilder	simplifiedGDDFileOutBuilder;
+	@Autowired
 	private GamePlatformService			gamePlatformService;
 	private Integer						pageNum;
+	@Autowired
 	private ESRBRatingService			eSRBRatingService;
+	@Autowired
 	private EmailService				emailService;
+	private String						userEmail;
 	/**
 	 * This is the first page in the scroll-able build content.
 	 */
@@ -76,11 +84,6 @@ public class GDDBuildBeanImpl implements BaseBean
 	public void init()
 	{
 		setPageNum(1);
-		this.setSimplifiedGDDBuilder(new SimplifiedGDDBuilderImpl());
-		this.setESRBRatingService(new ESRBRatingServiceImpl());
-		this.setGamePlatformService(new GamePlatformServiceImpl());
-		this.setSimplifiedGDDFileOutBuilder(new SimplifiedGDDFileOutBuilderImpl());
-		this.setEmailService(new EmailServiceImpl());
 		isPageActive = new ArrayList<Boolean>(FINAL_PAGE);
 		for (int i = 0; i < FINAL_PAGE; i++)
 		{
@@ -132,29 +135,16 @@ public class GDDBuildBeanImpl implements BaseBean
 
 	public void graphicUpload(FileUploadEvent event)
 	{
-		System.out.println("Entering grahpicUpload method");
 		Assert.notNull(event, "The file upload did not occur properly");
 		UploadedFile file = event.getFile();
-		System.out.println();
-		System.out.println(file.getFileName());
-		System.out.println();
 		BufferedImage bf = null;
 		try
 		{
 			bf = ImageIO.read((File) file);
 		} catch (IOException e)
 		{
-			System.out.println();
-			System.out.println("You lose sucker!");
-			System.out.println();
+
 		}
-	}
-
-	public List<SelectItem> getMediaTypes()
-	{
-		List<SelectItem> returnList = CommonUtils.getDefaultList();
-
-		return returnList;
 	}
 
 	public void build()
@@ -162,13 +152,13 @@ public class GDDBuildBeanImpl implements BaseBean
 		SimplifiedGDDFormat simplifiedGDDFormat = (SimplifiedGDDFormat) this.simplifiedGDDBuilder.build();
 		if (simplifiedGDDFormat == null)
 		{
-			addPopUpMessage(MISSING_MSG);
+			CommonUtils.addPopUpMessage("Result:", MISSING_MSG);
 			return;
 		}
-		String email = emailService.getUserEmail();
+		String email = getUserEmail();
 		if (!emailService.validateEmail(email))
 		{
-			addPopUpMessage(VALID_EMAIL_REQUEST);
+			CommonUtils.addPopUpMessage("Result:", VALID_EMAIL_REQUEST);
 			return;
 		}
 
@@ -176,14 +166,14 @@ public class GDDBuildBeanImpl implements BaseBean
 
 		refresh();
 
-		addPopUpMessage(SUCESSFULLY_SENT_EMAIL + email + " " + INBOX);
+		CommonUtils.addPopUpMessage("Result:", SUCESSFULLY_SENT_EMAIL + email + " " + INBOX);
 	}
 
 	public void refresh()
 	{
-		this.pageNum = FIRST_PAGE;
-		this.simplifiedGDDBuilder = new SimplifiedGDDBuilderImpl();
-		this.emailService = new EmailServiceImpl();
+		setPageNum(FIRST_PAGE);
+		this.simplifiedGDDBuilder.refresh();
+		this.userEmail = "";
 		showPage(FIRST_PAGE);
 	}
 
@@ -206,12 +196,6 @@ public class GDDBuildBeanImpl implements BaseBean
 			}
 		}
 		return FIRST_PAGE;
-	}
-
-	private void addPopUpMessage(String message)
-	{
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Result:", message));
 	}
 
 	public SimplifiedGDDFileOutBuilder getSimplifiedGDDFileOutBuilder()
@@ -282,5 +266,15 @@ public class GDDBuildBeanImpl implements BaseBean
 	public void setEmailService(EmailService emailService)
 	{
 		this.emailService = emailService;
+	}
+
+	public void setUserEmail(String email)
+	{
+		this.userEmail = email;
+	}
+
+	public String getUserEmail()
+	{
+		return this.userEmail;
 	}
 }

@@ -7,12 +7,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
-import com.emerald.gdd.common.params.impl.ESRBRating;
 import com.emerald.gdd.common.params.impl.GamePlatform;
 import com.emerald.gdd.common.utils.CommonUtils;
 import com.emerald.gdd.data.model.GamePlatformDAO;
-
+@Component
 public class GamePlatformDAOImpl implements GamePlatformDAO
 {
 
@@ -31,8 +31,7 @@ public class GamePlatformDAOImpl implements GamePlatformDAO
 		{
 			e.printStackTrace();
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{
@@ -41,6 +40,7 @@ public class GamePlatformDAOImpl implements GamePlatformDAO
 		}
 		return null;
 	}
+
 	@Override
 	public GamePlatform selectById(String id)
 	{
@@ -56,8 +56,7 @@ public class GamePlatformDAOImpl implements GamePlatformDAO
 		{
 			e.printStackTrace();
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{

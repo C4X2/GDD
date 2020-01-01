@@ -17,4 +17,15 @@ public interface CompanyContactBean extends BaseBean
 	 * @return a list of select-able options.
 	 */
 	public List<SelectItem> getHelpList();
+
+	/**
+	 * Submits the contact record. If the contact record is not valid it will not be
+	 * saved.
+	 */
+	public void submit();
+
+	/**
+	 * Reset the ContactRecord in context.
+	 */
+	public void resetContactRecord();
 }

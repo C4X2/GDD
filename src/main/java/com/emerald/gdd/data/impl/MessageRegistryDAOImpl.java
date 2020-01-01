@@ -1,7 +1,6 @@
 package com.emerald.gdd.data.impl;
 
 import java.io.InputStream;
-import java.io.Reader;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -30,8 +29,7 @@ public class MessageRegistryDAOImpl implements MessageRegistryDAO
 		{
 			e.printStackTrace();
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{
@@ -56,8 +54,7 @@ public class MessageRegistryDAOImpl implements MessageRegistryDAO
 		} catch (Exception e)
 		{
 			// do nothing
-		}
-		finally
+		} finally
 		{
 			if (session != null)
 			{

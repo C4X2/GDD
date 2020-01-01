@@ -67,20 +67,24 @@
 					</div>
 				</div>
 				<div class="row b2">
-					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.isPageActive[2]}"></p:outputLabel>
-					<br /> <br />
-					<p:inputTextarea
-						id="storyOutline_inputText"
-						rendered="#{build.isPageActive[2]}"
-						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.storyOutline}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="storyOutline" maxlength="1000"
-						counterTemplate="{0} characters remaining."
-						validatorMessage="Please shorten your message to under 1000 characters."
-						 />
-					<br />
-					<h:outputText id="storyOutline" rendered="#{build.isPageActive[2]}"/>
-					<br />
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.isPageActive[2]}"></p:outputLabel>
+						<br /> <br />
+						<p:inputTextarea
+							id="storyOutline_inputText"
+							rendered="#{build.isPageActive[2]}"
+							value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.storyOutline}"
+							title="user_input"
+							cols="65" counter="storyOutline" maxlength="1000"
+							counterTemplate="{0} characters remaining."
+							validatorMessage="Please shorten your message to under 1000 characters."
+							 />
+						<br />
+						<h:outputText id="storyOutline" rendered="#{build.isPageActive[2]}"/>
+						<br />
+					</div>
+					<div class="col-sm-4"></div>
 				</div>
 				<div class="row b3">
 					<p:outputLabel for="@next"
@@ -90,8 +94,8 @@
 						id="gameInspirations_inputText"
 						rendered="#{build.isPageActive[3]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.gameInspirations}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="gameInspirations" maxlength="1000"
+						title="user_input"
+						cols="65" counter="gameInspirations" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
@@ -103,7 +107,7 @@
 					<p:outputLabel for="@next" value="#{msg.outline_text}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea value="#{TODO}" title="user_input"
-						placeholder="#{msg.placeholder_user_input}" cols="30"
+						  cols="65"
 						counter="display" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
@@ -121,8 +125,8 @@
 						id="characterControlSheme_inputText"
 						rendered="#{build.isPageActive[5]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.characterControlSheme}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="characterControlSheme" maxlength="1000"
+						title="user_input"  
+						cols="65" counter="characterControlSheme" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
@@ -137,8 +141,8 @@
 						id="playerExperienceGoal_inputText"
 						rendered="#{build.isPageActive[6]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.playerExperienceGoal}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="playerExperienceGoal" maxlength="1000"
+						title="user_input"  
+						cols="65" counter="playerExperienceGoal" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
@@ -153,8 +157,8 @@
 						id="mechanics_inputText"
 						rendered="#{build.isPageActive[7]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.mechanics}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="mechanics" maxlength="1000"
+						title="user_input"  
+						cols="65" counter="mechanics" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
@@ -162,14 +166,14 @@
 					<h:outputText id="mechanics" rendered="#{build.isPageActive[7]}"/>
 				</div>
 				<div class="row b8">
-					<p:outputLabel for="@next" value="#{msg.outline_text}" rendered="#{build.isPageActive[8]}"></p:outputLabel>
+					<p:outputLabel for="@next" value="#{msg.monetization}" rendered="#{build.isPageActive[8]}"></p:outputLabel>
 					<br /> <br />
 					<p:inputTextarea
 						id="monetizationStrategy_inputText"
 						rendered="#{build.isPageActive[8]}"
 						value="#{build.simplifiedGDDBuilder.simplifiedGDDFormat.monetizationStrategy}"
-						title="user_input" placeholder="#{msg.placeholder_user_input}"
-						cols="30" counter="monetizationStrategy" maxlength="1000"
+						title="user_input"  
+						cols="65" counter="monetizationStrategy" maxlength="1000"
 						counterTemplate="{0} characters remaining."
 						validatorMessage="Please shorten your message to under 1000 characters."
 						 />
@@ -180,7 +184,7 @@
 					<p:growl id="popup-growl" showDetail="true" sticky="false"></p:growl>
 					<p:outputLabel for="@next" value="Your Email. The document will be sent here." rendered="#{build.isPageActive[9]}"></p:outputLabel>
 					<p:inputText
-						value="#{build.emailService.userEmail}" rendered="#{build.isPageActive[9]}"></p:inputText>
+						value="#{build.userEmail}" rendered="#{build.isPageActive[9]}"></p:inputText>
 					&#160; &#160;
 					<p:commandButton value="Build!" rendered="#{build.isPageActive[9]}" action="#{build.build}" update="popup-growl,@form" ></p:commandButton>
 				</div>

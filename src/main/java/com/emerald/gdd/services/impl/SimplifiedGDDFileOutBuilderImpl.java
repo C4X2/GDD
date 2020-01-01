@@ -6,12 +6,14 @@ import java.io.PrintWriter;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.emerald.gdd.common.constants.StandardTextString;
 import com.emerald.gdd.common.params.impl.SimplifiedGDDFormat;
 import com.emerald.gdd.services.model.SimplifiedGDDFileOutBuilder;
-
-public class SimplifiedGDDFileOutBuilderImpl implements SimplifiedGDDFileOutBuilder
+@Component
+public class SimplifiedGDDFileOutBuilderImpl implements SimplifiedGDDFileOutBuilder, StandardTextString
 {
 	private String	path;
 	private String	fileType;
@@ -43,8 +45,13 @@ public class SimplifiedGDDFileOutBuilderImpl implements SimplifiedGDDFileOutBuil
 			if (rtrnVal.canWrite())
 			{
 				pw = new PrintWriter(rtrnVal);
-				// Finish writing the entire GDD
+				// Start Writing GDD
 				pw.write(input.getTitle());
+				pw.write(StandardTextString.NEW_LINE);
+				pw.write(StandardTextString.NEW_LINE);
+				pw.write(input.getContactInfo() + "    "  + input.getCompanyInfo());
+				pw.write(StandardTextString.NEW_LINE);
+				// End Writing GDD
 			}
 
 			return rtrnVal;

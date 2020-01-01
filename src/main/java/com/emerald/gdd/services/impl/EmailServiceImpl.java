@@ -6,11 +6,11 @@ import com.emerald.gdd.services.model.EmailService;
 import java.io.File;
 
 import org.apache.commons.mail.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmailServiceImpl implements EmailService, EmeraldEmailConstants
 {
-
-	private String userEmail;
 
 	@Override
 	public void send(String email)
@@ -64,18 +64,6 @@ public class EmailServiceImpl implements EmailService, EmeraldEmailConstants
 			return false;
 		}
 		return email.matches(EMAIL_REGEX);
-	}
-
-	@Override
-	public void setUserEmail(String email)
-	{
-		this.userEmail = email;
-	}
-
-	@Override
-	public String getUserEmail()
-	{
-		return this.userEmail;
 	}
 
 }
